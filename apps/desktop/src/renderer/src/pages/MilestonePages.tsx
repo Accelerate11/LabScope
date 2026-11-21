@@ -7,6 +7,7 @@ import { useAppStore } from '../store';
 import type { AiProviderConfig, AiProviderInput } from '../../../shared/ai-types';
 import { buildLocalContext } from '../ai/local-analysis';
 import type { ExperimentAnalysis, LogAnalysis } from '@labscope/analysis-engine';
+import type { Conversation } from '../../../shared/conversation-types';
 
 export function DataPage(): React.JSX.Element {
   const status = useAppStore((state) => state.status);
@@ -79,19 +80,24 @@ export function AiPage(): React.JSX.Element {
   const [logText, setLogText] = React.useState('');
   const [logAnalysis, setLogAnalysis] = React.useState<LogAnalysis>();
   const [report, setReport] = React.useState('');
+  const [conversations, setConversations] = React.useState<Conversation[]>([]);
+  const [conversationId, setConversationId] = React.useState('');
   const [providerForm, setProviderForm] = React.useState<AiProviderInput>({ name: '', kind: 'openai-compatible', baseUrl: 'https://api.openai.com/v1', model: '', apiKey: '', enabled: true });
   React.useEffect(() => {
-    void Promise.all([window.labscope.aiProviders(), window.labscope.recordingList()]).then(([p, e]) => {
+    void Promise.all([window.labscope.aiProviders(), window.labscope.recordingList(), window.labscope.conversationList()]).then(([p, e, c]) => {
       setProviders(p); setExperiments(e); setProviderId(p[0]?.id ?? ''); setExperimentId(e[0]?.experimentId ?? '');
+      setConversations(c); setConversationId(c[0]?.conversationId ?? '');
     }).catch((cause) => setError(String(cause)));
   }, []);
   const experiment = experiments.find((item) => item.experimentId === experimentId);
   const button = 'focus-ring rounded border border-border px-2 py-1 text-xs hover:border-accent disabled:opacity-40';
   const field = 'focus-ring rounded border border-border bg-bg px-2 py-1 text-xs text-ink';
   const download = (name: string, content: string, type: string): void => { const url = URL.createObjectURL(new Blob([content], { type })); const anchor = document.createElement('a'); anchor.href = url; anchor.download = name; anchor.click(); URL.revokeObjectURL(url); };
+  const ensureConversation = async (): Promise<string> => { if (conversationId) return conversationId; const item = await window.labscope.conversationCreate({ title: experiment?.name ?? 'Experiment analysis', experimentId: experimentId || null, providerId, modelId: providers.find((entry) => entry.id === providerId)?.model ?? 'deterministic-v1' }); setConversations((current) => [item, ...current]); setConversationId(item.conversationId); return item.conversationId; };
   return <div className="flex h-full min-h-0 flex-col gap-3 overflow-auto p-3 text-xs text-muted">
     <section className="rounded border border-border p-3">
       <h1 className="mb-2 text-sm font-semibold text-ink">AI Analysis Workspace</h1>
+      <div className="mb-2 flex flex-wrap gap-2"><select className={field} value={conversationId} onChange={(event) => setConversationId(event.target.value)}><option value="">新建会话</option>{conversations.map((item) => <option key={item.conversationId} value={item.conversationId}>{item.title}</option>)}</select><button className={button} onClick={async () => { const item = await window.labscope.conversationCreate({ title: 'New analysis', experimentId: experimentId || null, providerId, modelId: providers.find((entry) => entry.id === providerId)?.model ?? 'deterministic-v1' }); setConversations((current) => [item, ...current]); setConversationId(item.conversationId); }}>新建会话</button></div>
       <div className="flex flex-wrap gap-2">
         <select className={field} value={experimentId} onChange={(e) => setExperimentId(e.target.value)}>
           <option value="">选择实验</option>{experiments.map((item) => <option key={item.experimentId} value={item.experimentId}>{item.name}</option>)}
@@ -114,11 +120,11 @@ export function AiPage(): React.JSX.Element {
       <textarea className={field + ' mt-2 min-h-20 w-full'} value={prompt} onChange={(e) => setPrompt(e.target.value)} />
       <div className="mt-2 flex flex-wrap gap-2">
         <button className={button} disabled={!experiment} onClick={async () => {
-        try { setError(''); setAnalysis(await window.labscope.analysisRun(experiment!.experimentId)); }
+        try { setError(''); const id = await ensureConversation(); setAnalysis(await window.labscope.analysisRun(experiment!.experimentId)); await window.labscope.conversationAppend(id, { role: 'tool-result', text: 'Deterministic experiment analysis completed.', evidence: [experiment!.experimentId] }); }
         catch (cause) { setError(cause instanceof Error ? cause.message : String(cause)); }
       }}>运行本地确定性分析</button>
       <button className={button} disabled={!providerId || !experiment} onClick={async () => {
-        try { setError(''); const result = await window.labscope.aiChat(providerId, buildLocalContext(experiment!) + '\n\nComputed analysis is performed locally before this interpretation.\nUser question: ' + prompt); setAnswer(result.text); }
+        try { setError(''); const id = await ensureConversation(); await window.labscope.conversationAppend(id, { role: 'user', text: prompt }); const result = await window.labscope.aiChat(providerId, buildLocalContext(experiment!) + '\n\nComputed analysis is performed locally before this interpretation.\nUser question: ' + prompt); setAnswer(result.text); await window.labscope.conversationAppend(id, { role: 'assistant', text: result.text }); }
         catch (cause) { setError(cause instanceof Error ? cause.message : String(cause)); }
       }}>请求模型解释</button>
       <button className={button} disabled={!experiment} onClick={async () => {
@@ -129,7 +135,7 @@ export function AiPage(): React.JSX.Element {
       {error && <p role="alert" className="mt-2 text-danger">{error}</p>}
       {answer && <pre className="mt-2 max-h-72 overflow-auto whitespace-pre-wrap rounded border border-border bg-bg p-2 text-ink">{answer}</pre>}
       {analysis && <pre className="mt-2 max-h-72 overflow-auto whitespace-pre-wrap rounded border border-border bg-bg p-2 text-ink">{JSON.stringify(analysis, null, 2)}</pre>}
-      {report && <div className="mt-2 flex flex-wrap gap-2"><button className={button} onClick={() => download((experiment?.name ?? 'experiment') + '-report.md', report, 'text/markdown')}>下载 Markdown</button><button className={button} onClick={async () => { const result = await window.labscope.reportGenerate(experiment!.experimentId, providerId, prompt); download((experiment?.name ?? 'experiment') + '-report.html', result.html, 'text/html'); }}>下载 HTML</button><button className={button} onClick={() => void navigator.clipboard?.writeText(report)}>复制报告</button></div>}
+      {report && <div className="mt-2 flex flex-wrap gap-2"><button className={button} onClick={() => download((experiment?.name ?? 'experiment') + '-report.md', report, 'text/markdown')}>下载 Markdown</button><button className={button} onClick={async () => { const result = await window.labscope.reportGenerate(experiment!.experimentId, providerId, prompt); download((experiment?.name ?? 'experiment') + '-report.html', result.html, 'text/html'); }}>下载 HTML</button><button className={button} onClick={async () => { const result = await window.labscope.reportGenerate(experiment!.experimentId, providerId, prompt); setAnswer('PDF 已保存: ' + await window.labscope.reportExportPdf(result.html, (experiment?.name ?? 'experiment') + '-report.pdf')); }}>导出 PDF</button><button className={button} onClick={() => void navigator.clipboard?.writeText(report)}>复制报告</button></div>}
     </section>
     <section className="rounded border border-border p-3">
       <h2 className="mb-2 font-semibold text-ink">本地实验上下文</h2>

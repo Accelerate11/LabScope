@@ -35,6 +35,12 @@ export const IPC = {
   analysisRun: 'analysis:run',
   analysisLog: 'analysis:log',
   reportGenerate: 'report:generate',
+  conversationList: 'conversation:list',
+  conversationCreate: 'conversation:create',
+  conversationSave: 'conversation:save',
+  conversationDelete: 'conversation:delete',
+  conversationAppend: 'conversation:append',
+  reportExportPdf: 'report:export-pdf',
 } as const;
 
 export type IpcChannel = (typeof IPC)[keyof typeof IPC];

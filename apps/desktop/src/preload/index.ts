@@ -5,6 +5,7 @@ import type { LabScopeApi } from '../shared/api';
 import type { DesktopConfig, LogEntry, SessionStatus, TelemetryPayload } from '../shared/types';
 import type { ExperimentManifest, RecordingOptions, RecordingStatus } from '../shared/recording-types';
 import type { AiProviderConfig, AiProviderInput, AiResponse } from '../shared/ai-types';
+import type { Conversation, ConversationMessage } from '../shared/conversation-types';
 
 /**
  * The only bridge between the sandboxed renderer and Electron.
@@ -60,6 +61,12 @@ const api: LabScopeApi = {
   analysisRun: (experimentId: string) => ipcRenderer.invoke(IPC.analysisRun, experimentId),
   analysisLog: (text: string, source?: string) => ipcRenderer.invoke(IPC.analysisLog, text, source),
   reportGenerate: (experimentId: string, providerId?: string, prompt?: string) => ipcRenderer.invoke(IPC.reportGenerate, experimentId, providerId, prompt),
+  conversationList: () => ipcRenderer.invoke(IPC.conversationList),
+  conversationCreate: (input: { title: string; experimentId: string | null; providerId: string; modelId: string }) => ipcRenderer.invoke(IPC.conversationCreate, input),
+  conversationSave: (conversationId: string, patch: Partial<Conversation>) => ipcRenderer.invoke(IPC.conversationSave, conversationId, patch),
+  conversationDelete: (conversationId: string) => ipcRenderer.invoke(IPC.conversationDelete, conversationId),
+  conversationAppend: (conversationId: string, message: Omit<ConversationMessage, 'id' | 'createdAt'>) => ipcRenderer.invoke(IPC.conversationAppend, conversationId, message),
+  reportExportPdf: (html: string, filename: string) => ipcRenderer.invoke(IPC.reportExportPdf, html, filename),
 };
 
 contextBridge.exposeInMainWorld('labscope', api);

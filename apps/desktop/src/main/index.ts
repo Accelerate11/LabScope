@@ -17,6 +17,9 @@ import type { ExperimentManifest, RecordingOptions, RecordingStatus } from './re
 import { AiGateway } from './ai-gateway';
 import { ExperimentAnalysisService } from './analysis-service';
 import { htmlReport, markdownReport } from '@labscope/analysis-engine';
+import { ConversationStore } from './conversation-store';
+import type { Conversation, ConversationMessage } from '../shared/conversation-types';
+import { mkdir, writeFile } from 'node:fs/promises';
 
 const currentDir = dirname(fileURLToPath(import.meta.url));
 const isDev = !app.isPackaged;
@@ -29,6 +32,7 @@ let mainWindow: BrowserWindow | null = null;
 const recorder = new RecordingManager();
 const ai = new AiGateway();
 const analysis = new ExperimentAnalysisService();
+const conversations = new ConversationStore();
 
 const host = new DataWorkerHost(join(currentDir, 'data-worker.js'), {
   onStatus: (status) => broadcast(IPC.eventSessionStatus, status),
@@ -163,6 +167,22 @@ function registerIpc(config: ConfigStore): void {
     }
     const markdown = markdownReport(result, interpretation);
     return { markdown, html: htmlReport(markdown), analysis: result };
+  });
+  ipcMain.handle(IPC.conversationList, (): Promise<Conversation[]> => conversations.list());
+  ipcMain.handle(IPC.conversationCreate, (_event, input: unknown): Promise<Conversation> => {
+    if (!input || typeof input !== 'object') throw new Error('会话配置无效');
+    const value = input as Record<string, unknown>;
+    return conversations.create({ title: String(value.title ?? ''), experimentId: typeof value.experimentId === 'string' ? value.experimentId : null, providerId: String(value.providerId ?? 'local-mock'), modelId: String(value.modelId ?? 'deterministic-v1') });
+  });
+  ipcMain.handle(IPC.conversationSave, (_event, id: unknown, patch: unknown): Promise<Conversation> => { if (typeof id !== 'string' || !patch || typeof patch !== 'object') throw new Error('会话更新无效'); return conversations.save(id, patch as Partial<Conversation>); });
+  ipcMain.handle(IPC.conversationDelete, (_event, id: unknown): Promise<void> => { if (typeof id !== 'string') throw new Error('会话 ID 无效'); return conversations.remove(id); });
+  ipcMain.handle(IPC.conversationAppend, (_event, id: unknown, message: unknown): Promise<Conversation> => { if (typeof id !== 'string' || !message || typeof message !== 'object') throw new Error('会话消息无效'); return conversations.append(id, message as Omit<ConversationMessage, 'id' | 'createdAt'>); });
+  ipcMain.handle(IPC.reportExportPdf, async (_event, html: unknown, filename: unknown): Promise<string> => {
+    if (typeof html !== 'string' || html.length > 5_000_000 || typeof filename !== 'string') throw new Error('报告内容无效');
+    const safe = filename.replace(/[^a-zA-Z0-9._-]/g, '_').slice(0, 120) || 'report.pdf'; const dir = join(app.getPath('userData'), 'reports'); await mkdir(dir, { recursive: true }); const output = join(dir, safe.endsWith('.pdf') ? safe : safe + '.pdf');
+    const reportWindow = new BrowserWindow({ show: false, webPreferences: { sandbox: true, contextIsolation: true, nodeIntegration: false } });
+    try { await reportWindow.loadURL('data:text/html;charset=utf-8,' + encodeURIComponent(html)); const pdf = await reportWindow.webContents.printToPDF({ printBackground: true, preferCSSPageSize: true }); await writeFile(output, pdf); return output; }
+    finally { if (!reportWindow.isDestroyed()) reportWindow.close(); }
   });
 }
 
