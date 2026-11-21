@@ -3,7 +3,6 @@ node_modules/
 dist/
 apps/desktop/out/
 apps/desktop/release/
-release/
 out/
 win-unpacked/
 linux-unpacked/
