@@ -6,6 +6,7 @@ import type { ExperimentManifest, RecordingStatus } from '../../../shared/record
 import { useAppStore } from '../store';
 import type { AiProviderConfig, AiProviderInput } from '../../../shared/ai-types';
 import { buildLocalContext } from '../ai/local-analysis';
+import type { ExperimentAnalysis, LogAnalysis } from '@labscope/analysis-engine';
 
 export function DataPage(): React.JSX.Element {
   const status = useAppStore((state) => state.status);
@@ -74,6 +75,10 @@ export function AiPage(): React.JSX.Element {
   const [prompt, setPrompt] = React.useState('请总结这次实验的基本信息，并区分已确认事实和未知信息。');
   const [answer, setAnswer] = React.useState('');
   const [error, setError] = React.useState('');
+  const [analysis, setAnalysis] = React.useState<ExperimentAnalysis>();
+  const [logText, setLogText] = React.useState('');
+  const [logAnalysis, setLogAnalysis] = React.useState<LogAnalysis>();
+  const [report, setReport] = React.useState('');
   const [providerForm, setProviderForm] = React.useState<AiProviderInput>({ name: '', kind: 'openai-compatible', baseUrl: 'https://api.openai.com/v1', model: '', apiKey: '', enabled: true });
   React.useEffect(() => {
     void Promise.all([window.labscope.aiProviders(), window.labscope.recordingList()]).then(([p, e]) => {
@@ -83,6 +88,7 @@ export function AiPage(): React.JSX.Element {
   const experiment = experiments.find((item) => item.experimentId === experimentId);
   const button = 'focus-ring rounded border border-border px-2 py-1 text-xs hover:border-accent disabled:opacity-40';
   const field = 'focus-ring rounded border border-border bg-bg px-2 py-1 text-xs text-ink';
+  const download = (name: string, content: string, type: string): void => { const url = URL.createObjectURL(new Blob([content], { type })); const anchor = document.createElement('a'); anchor.href = url; anchor.download = name; anchor.click(); URL.revokeObjectURL(url); };
   return <div className="flex h-full min-h-0 flex-col gap-3 overflow-auto p-3 text-xs text-muted">
     <section className="rounded border border-border p-3">
       <h1 className="mb-2 text-sm font-semibold text-ink">AI Analysis Workspace</h1>
@@ -106,16 +112,32 @@ export function AiPage(): React.JSX.Element {
         }}>保存 Provider</button>
       </div>
       <textarea className={field + ' mt-2 min-h-20 w-full'} value={prompt} onChange={(e) => setPrompt(e.target.value)} />
-      <button className={button + ' mt-2'} disabled={!providerId || !experiment} onClick={async () => {
-        try { setError(''); const result = await window.labscope.aiChat(providerId, buildLocalContext(experiment!) + '\n\nUser question: ' + prompt); setAnswer(result.text); }
+      <div className="mt-2 flex flex-wrap gap-2">
+        <button className={button} disabled={!experiment} onClick={async () => {
+        try { setError(''); setAnalysis(await window.labscope.analysisRun(experiment!.experimentId)); }
         catch (cause) { setError(cause instanceof Error ? cause.message : String(cause)); }
-      }}>分析实验</button>
+      }}>运行本地确定性分析</button>
+      <button className={button} disabled={!providerId || !experiment} onClick={async () => {
+        try { setError(''); const result = await window.labscope.aiChat(providerId, buildLocalContext(experiment!) + '\n\nComputed analysis is performed locally before this interpretation.\nUser question: ' + prompt); setAnswer(result.text); }
+        catch (cause) { setError(cause instanceof Error ? cause.message : String(cause)); }
+      }}>请求模型解释</button>
+      <button className={button} disabled={!experiment} onClick={async () => {
+        try { const result = await window.labscope.reportGenerate(experiment!.experimentId, providerId, prompt); setReport(result.markdown); }
+        catch (cause) { setError(cause instanceof Error ? cause.message : String(cause)); }
+      }}>生成报告</button>
+      </div>
       {error && <p role="alert" className="mt-2 text-danger">{error}</p>}
       {answer && <pre className="mt-2 max-h-72 overflow-auto whitespace-pre-wrap rounded border border-border bg-bg p-2 text-ink">{answer}</pre>}
+      {analysis && <pre className="mt-2 max-h-72 overflow-auto whitespace-pre-wrap rounded border border-border bg-bg p-2 text-ink">{JSON.stringify(analysis, null, 2)}</pre>}
+      {report && <div className="mt-2 flex flex-wrap gap-2"><button className={button} onClick={() => download((experiment?.name ?? 'experiment') + '-report.md', report, 'text/markdown')}>下载 Markdown</button><button className={button} onClick={async () => { const result = await window.labscope.reportGenerate(experiment!.experimentId, providerId, prompt); download((experiment?.name ?? 'experiment') + '-report.html', result.html, 'text/html'); }}>下载 HTML</button><button className={button} onClick={() => void navigator.clipboard?.writeText(report)}>复制报告</button></div>}
     </section>
     <section className="rounded border border-border p-3">
       <h2 className="mb-2 font-semibold text-ink">本地实验上下文</h2>
       {experiment ? <pre className="whitespace-pre-wrap">{buildLocalContext(experiment)}</pre> : <p>暂无实验。录制或导入一个实验后可分析。</p>}
+      <h2 className="mt-3 mb-2 font-semibold text-ink">日志解析</h2>
+      <textarea className={field + ' min-h-24 w-full'} value={logText} onChange={(event) => setLogText(event.target.value)} placeholder="粘贴 ROS / Python / C++ 或 JSON 日志" />
+      <button className={button + ' mt-2'} disabled={!logText} onClick={async () => { try { setLogAnalysis(await window.labscope.analysisLog(logText, 'AI Workspace')); } catch (cause) { setError(cause instanceof Error ? cause.message : String(cause)); } }}>解析日志</button>
+      {logAnalysis && <pre className="mt-2 max-h-60 overflow-auto whitespace-pre-wrap">{JSON.stringify({ counts: logAnalysis.counts, clusters: logAnalysis.clusters }, null, 2)}</pre>}
     </section>
   </div>;
 }

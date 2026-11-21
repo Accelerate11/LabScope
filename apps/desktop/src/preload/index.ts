@@ -56,6 +56,10 @@ const api: LabScopeApi = {
   aiProviderRemove: (id: string) => ipcRenderer.invoke(IPC.aiProviderRemove, id),
   aiProviderTest: (id: string) => ipcRenderer.invoke(IPC.aiProviderTest, id),
   aiChat: (id: string, prompt: string, maxTokens?: number) => ipcRenderer.invoke(IPC.aiChat, id, prompt, maxTokens),
+  analysisTools: () => ipcRenderer.invoke(IPC.analysisTools),
+  analysisRun: (experimentId: string) => ipcRenderer.invoke(IPC.analysisRun, experimentId),
+  analysisLog: (text: string, source?: string) => ipcRenderer.invoke(IPC.analysisLog, text, source),
+  reportGenerate: (experimentId: string, providerId?: string, prompt?: string) => ipcRenderer.invoke(IPC.reportGenerate, experimentId, providerId, prompt),
 };
 
 contextBridge.exposeInMainWorld('labscope', api);

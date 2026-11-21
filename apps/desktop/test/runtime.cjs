@@ -16,8 +16,9 @@ const source = (file) => f.readFileSync(p.join(bundle, file), 'utf8');
 const scratch = f.mkdtempSync(p.join(tmpdir(), 'labscope-runtime-'));
 const normalize = (datas) => JSON.parse(JSON.stringify(datas));
 const expectedCalls = ['ai:chat', 'ai:provider-remove', 'ai:provider-test', 'ai:provider-upsert', 'ai:providers',
+  'analysis:log', 'analysis:run', 'analysis:tools',
   'app:info', 'config:get', 'config:set', 'recording:cancel', 'recording:event', 'recording:list',
-  'recording:pause', 'recording:resume', 'recording:start', 'recording:stop', 'session:connect',
+  'recording:pause', 'recording:resume', 'recording:start', 'recording:stop', 'report:generate', 'session:connect',
   'session:disconnect', 'session:panel-topics', 'session:status', 'session:subscribe'];
 const outcomes = [];
 async function check(name, fn) {
@@ -181,6 +182,7 @@ async function main() {
       recordingEvent: [{ type: 'note', title: 'test', description: 'test', timeNs: '1' }],
       aiProviders: [], aiProviderUpsert: [{ name: 'test', kind: 'openai-compatible', baseUrl: 'https://example.invalid', model: 'test', apiKey: 'test', enabled: true }],
       aiProviderRemove: ['id'], aiProviderTest: ['id'], aiChat: ['id', 'prompt'],
+      analysisTools: [], analysisRun: ['experiment'], analysisLog: ['INFO fixture', 'fixture.log'], reportGenerate: ['experiment', 'local-mock', 'summarize'],
     })) await api[method](...args);
     assert.deepEqual(invokes.map((item) => item.channel).sort(), expectedCalls);
     for (const [method, name] of Object.entries({
@@ -213,6 +215,10 @@ async function main() {
     assert.equal(fresh.ipc('config:get').lastUrl, saved);
     f.writeFileSync(fresh.configFile, '{corrupt');
     assert.equal((await harness()).ipc('config:get').lastUrl, 'ws://127.0.0.1:8765');
+    const providers = await prod.ipc('ai:providers');
+    assert.ok(providers.some((provider) => provider.id === 'local-mock'));
+    const tools = prod.ipc('analysis:tools');
+    assert.ok(tools.some((tool) => tool.id === 'get_topic_statistics'));
     return 'URL and topic guards held. The file is read by a new instance, and malformed JSON falls back to the default.';
   });
   await check('Config write failure is reported to the caller', async () => {

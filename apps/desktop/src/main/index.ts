@@ -15,6 +15,8 @@ import { runWorkspaceSmoke } from './workspace-smoke';
 import { listExperiments, RecordingManager } from './recording-manager';
 import type { ExperimentManifest, RecordingOptions, RecordingStatus } from './recording-manager';
 import { AiGateway } from './ai-gateway';
+import { ExperimentAnalysisService } from './analysis-service';
+import { htmlReport, markdownReport } from '@labscope/analysis-engine';
 
 const currentDir = dirname(fileURLToPath(import.meta.url));
 const isDev = !app.isPackaged;
@@ -26,6 +28,7 @@ const isSmoke = isSimulationSmoke || pointCloudSmoke !== undefined || mcapSmoke 
 let mainWindow: BrowserWindow | null = null;
 const recorder = new RecordingManager();
 const ai = new AiGateway();
+const analysis = new ExperimentAnalysisService();
 
 const host = new DataWorkerHost(join(currentDir, 'data-worker.js'), {
   onStatus: (status) => broadcast(IPC.eventSessionStatus, status),
@@ -139,6 +142,27 @@ function registerIpc(config: ConfigStore): void {
   ipcMain.handle(IPC.aiChat, (_event, id: unknown, prompt: unknown, maxTokens: unknown): Promise<unknown> => {
     if (typeof id !== 'string' || typeof prompt !== 'string') throw new Error('AI 请求无效');
     return ai.chat(id, prompt, typeof maxTokens === 'number' ? maxTokens : 1024);
+  });
+  ipcMain.handle(IPC.analysisTools, (): unknown => analysis.listTools());
+  ipcMain.handle(IPC.analysisRun, (_event, experimentId: unknown): Promise<unknown> => {
+    if (typeof experimentId !== 'string' || !experimentId) throw new Error('实验 ID 无效');
+    return analysis.analyze(experimentId);
+  });
+  ipcMain.handle(IPC.analysisLog, (_event, text: unknown, source: unknown): unknown => {
+    if (typeof text !== 'string' || text.length > 2_000_000) throw new Error('日志内容无效或超过 2 MiB');
+    return analysis.tools.execute('analyze_log', { text, source: typeof source === 'string' ? source : 'renderer' });
+  });
+  ipcMain.handle(IPC.reportGenerate, async (_event, experimentId: unknown, providerId: unknown, prompt: unknown): Promise<unknown> => {
+    if (typeof experimentId !== 'string' || !experimentId) throw new Error('实验 ID 无效');
+    const result = await analysis.analyze(experimentId);
+    let interpretation = '';
+    if (typeof providerId === 'string' && providerId) {
+      const question = typeof prompt === 'string' && prompt ? prompt : '请基于以下本地计算结果给出简短解释，严格区分 Observed Facts、Computed Metrics、Model Interpretation 和 Hypotheses。\n';
+      const response = await ai.chat(providerId, question + '\n' + JSON.stringify(result), 1200);
+      interpretation = response.text;
+    }
+    const markdown = markdownReport(result, interpretation);
+    return { markdown, html: htmlReport(markdown), analysis: result };
   });
 }
 

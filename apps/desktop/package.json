@@ -19,6 +19,7 @@
   },
   "devDependencies": {
     "@labscope/data-source": "workspace:*",
+    "@labscope/analysis-engine": "workspace:*",
     "@labscope/ros-protocol": "workspace:*",
     "@labscope/ros-schema": "workspace:*",
     "@labscope/simulation-engine": "workspace:*",

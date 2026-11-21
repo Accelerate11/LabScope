@@ -31,6 +31,10 @@ export const IPC = {
   aiProviderRemove: 'ai:provider-remove',
   aiProviderTest: 'ai:provider-test',
   aiChat: 'ai:chat',
+  analysisTools: 'analysis:tools',
+  analysisRun: 'analysis:run',
+  analysisLog: 'analysis:log',
+  reportGenerate: 'report:generate',
 } as const;
 
 export type IpcChannel = (typeof IPC)[keyof typeof IPC];

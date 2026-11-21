@@ -8,6 +8,7 @@ import type {
 import type { RecordingChannelEvent, RecordingMessageEvent } from './types';
 import type { RecordingOptions, RecordingStatus, ExperimentManifest } from './recording-types';
 import type { AiProviderConfig, AiProviderInput, AiResponse } from './ai-types';
+import type { ExperimentAnalysis, LogAnalysis } from '@labscope/analysis-engine';
 
 /**
  * The complete surface the renderer can reach. Everything else in Electron
@@ -41,6 +42,10 @@ export interface LabScopeApi {
   aiProviderRemove(id: string): Promise<AiProviderConfig[]>;
   aiProviderTest(id: string): Promise<{ ok: boolean; message: string }>;
   aiChat(id: string, prompt: string, maxTokens?: number): Promise<AiResponse>;
+  analysisTools(): Promise<{ id: string; name: string; description: string; permission: 'read' }[]>;
+  analysisRun(experimentId: string): Promise<ExperimentAnalysis>;
+  analysisLog(text: string, source?: string): Promise<LogAnalysis>;
+  reportGenerate(experimentId: string, providerId?: string, prompt?: string): Promise<{ markdown: string; html: string; analysis: ExperimentAnalysis }>;
 }
 
 /** Worker thread message contract (`main` <-> `data-worker`). */

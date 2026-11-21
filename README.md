@@ -65,6 +65,7 @@ scripts/            ROS 2 and development helpers
 docs/m0/            ROS 2 protocol evidence and schemas
 docs/m1/            Desktop runtime reports
 docs/m2/            Visualization, timeline, and MCAP documentation
+docs/m3/            AI workspace, deterministic analysis, tools, and report documentation
 docs/product/       V1 product, architecture, data, AI, and user guides
 .github/workflows/  Reproducible CI build and test workflow
 ```

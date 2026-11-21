@@ -9,6 +9,7 @@ const { app, safeStorage } = electron;
 interface StoredProvider extends Omit<AiProviderConfig, 'hasKey'> { encryptedKey?: string; }
 interface StoreFile { version: 1; providers: StoredProvider[]; }
 const defaultStore = (): StoreFile => ({ version: 1, providers: [] });
+const localProvider: AiProviderConfig = { id: 'local-mock', name: 'Local Mock Provider', kind: 'mock', baseUrl: 'local://analysis', model: 'deterministic-v1', enabled: true, hasKey: false };
 function normalizeBaseUrl(value: string): string {
   const url = new URL(value);
   if (url.protocol !== 'http:' && url.protocol !== 'https:') throw new Error('AI Base URL 必须使用 HTTP(S)');
@@ -28,7 +29,7 @@ export class AiGateway {
   }
   async list(): Promise<AiProviderConfig[]> {
     const store = await this.read();
-    return store.providers.map(({ encryptedKey, ...provider }) => ({ ...provider, hasKey: !!encryptedKey }));
+    return [localProvider, ...store.providers.map(({ encryptedKey, ...provider }) => ({ ...provider, hasKey: !!encryptedKey }))];
   }
   async upsert(input: AiProviderInput): Promise<AiProviderConfig[]> {
     if (!input.name.trim() || !input.model.trim()) throw new Error('AI Provider 名称和模型不能为空');
@@ -54,6 +55,8 @@ export class AiGateway {
   }
   async chat(id: string, prompt: string, maxTokens = 1024): Promise<AiResponse> {
     const store = await this.read(), provider = store.providers.find((item) => item.id === id);
+    if (id === localProvider.id) return { providerId: localProvider.id, model: localProvider.model, durationMs: 0,
+      text: 'Local Mock Analysis\n\nObserved Facts: The request was processed locally.\nComputed Metrics: Use the attached deterministic analysis results.\nModel Interpretation: No external model was called.\nHypotheses: None were generated.\n\nPrompt summary: ' + prompt.slice(0, Math.min(prompt.length, 400)), usage: { inputTokens: 0, outputTokens: 0, totalTokens: 0 } };
     if (!provider?.encryptedKey) throw new Error('AI Provider 未配置 API Key');
     const key = safeStorage.decryptString(Buffer.from(provider.encryptedKey, 'base64'));
     const started = Date.now();
