@@ -1,0 +1,534 @@
+{
+  "label": "m0-final",
+  "startedAt": "2026-11-20T13:52:30.931Z",
+  "finishedAt": "2026-11-20T13:52:51.374Z",
+  "url": "ws://127.0.0.1:8765",
+  "subprotocol": "foxglove.sdk.v1",
+  "serverInfo": {
+    "op": "serverInfo",
+    "name": "",
+    "capabilities": [
+      "clientPublish",
+      "connectionGraph",
+      "parameters",
+      "parametersSubscribe",
+      "services",
+      "assets"
+    ],
+    "supportedEncodings": [
+      "cdr",
+      "json"
+    ],
+    "metadata": {
+      "ROS_DISTRO": "humble",
+      "fg-library": "foxglove-bridge/3.6.3 foxglove-sdk-cpp/0.30.2"
+    },
+    "sessionId": "1795182745219"
+  },
+  "connectMs": 28.75,
+  "durationSeconds": 20,
+  "channelCount": 9,
+  "channels": [
+    {
+      "id": 9,
+      "topic": "/camera/color/image_raw",
+      "encoding": "cdr",
+      "schemaEncoding": "ros2msg",
+      "schemaName": "sensor_msgs/msg/Image",
+      "schemaBytes": 2391
+    },
+    {
+      "id": 1,
+      "topic": "/foxglove_bridge/sysinfo",
+      "encoding": "json",
+      "schemaEncoding": "jsonschema",
+      "schemaName": "foxglove.SystemInfo",
+      "schemaBytes": 2214
+    },
+    {
+      "id": 8,
+      "topic": "/imu/data",
+      "encoding": "cdr",
+      "schemaEncoding": "ros2msg",
+      "schemaName": "sensor_msgs/msg/Imu",
+      "schemaBytes": 2755
+    },
+    {
+      "id": 7,
+      "topic": "/livox/lidar",
+      "encoding": "cdr",
+      "schemaEncoding": "ros2msg",
+      "schemaName": "sensor_msgs/msg/PointCloud2",
+      "schemaBytes": 2598
+    },
+    {
+      "id": 5,
+      "topic": "/odom",
+      "encoding": "cdr",
+      "schemaEncoding": "ros2msg",
+      "schemaName": "nav_msgs/msg/Odometry",
+      "schemaBytes": 3718
+    },
+    {
+      "id": 3,
+      "topic": "/parameter_events",
+      "encoding": "cdr",
+      "schemaEncoding": "ros2msg",
+      "schemaName": "rcl_interfaces/msg/ParameterEvent",
+      "schemaBytes": 2722
+    },
+    {
+      "id": 2,
+      "topic": "/rosout",
+      "encoding": "cdr",
+      "schemaEncoding": "ros2msg",
+      "schemaName": "rcl_interfaces/msg/Log",
+      "schemaBytes": 2065
+    },
+    {
+      "id": 6,
+      "topic": "/scan",
+      "encoding": "cdr",
+      "schemaEncoding": "ros2msg",
+      "schemaName": "sensor_msgs/msg/LaserScan",
+      "schemaBytes": 2549
+    },
+    {
+      "id": 4,
+      "topic": "/tf",
+      "encoding": "cdr",
+      "schemaEncoding": "ros2msg",
+      "schemaName": "tf2_msgs/msg/TFMessage",
+      "schemaBytes": 2673
+    }
+  ],
+  "subscribedTopics": [
+    "/imu/data",
+    "/livox/lidar",
+    "/odom",
+    "/tf",
+    "/scan",
+    "/camera/color/image_raw"
+  ],
+  "clientStats": {
+    "messagesReceived": 3385,
+    "bytesReceived": 104496160,
+    "framesReceived": 3388,
+    "decodeErrors": 0,
+    "connects": 1,
+    "reconnects": 0,
+    "lastMessageAt": 1795182764040
+  },
+  "topicStats": [
+    {
+      "topic": "/camera/color/image_raw",
+      "channelId": 9,
+      "schemaName": "sensor_msgs/msg/Image",
+      "encoding": "cdr",
+      "schemaEncoding": "ros2msg",
+      "count": 66,
+      "bytes": 60830352,
+      "decodeErrors": 0,
+      "decodeErrorSamples": [],
+      "firstLogTimeNs": "1795182751026188852",
+      "lastLogTimeNs": "1795182764026059520",
+      "rateHz": 5,
+      "meanDecodeUs": 19.64,
+      "maxDecodeUs": 103.1,
+      "sample": {
+        "schemaName": "sensor_msgs/msg/Image",
+        "frameId": "camera_color_optical_frame",
+        "stamp": 1795182750.9727025,
+        "topLevelFields": [
+          "header",
+          "height",
+          "width",
+          "encoding",
+          "is_bigendian",
+          "step",
+          "data"
+        ],
+        "payloadBytes": 921672
+      },
+      "assertions": []
+    },
+    {
+      "topic": "/imu/data",
+      "channelId": 8,
+      "schemaName": "sensor_msgs/msg/Imu",
+      "encoding": "cdr",
+      "schemaEncoding": "ros2msg",
+      "count": 1938,
+      "bytes": 627912,
+      "decodeErrors": 0,
+      "decodeErrorSamples": [],
+      "firstLogTimeNs": "1795182750882762397",
+      "lastLogTimeNs": "1795182764102841960",
+      "rateHz": 146.52,
+      "meanDecodeUs": 21.11,
+      "maxDecodeUs": 1598.9,
+      "sample": {
+        "frameId": "imu_link",
+        "stamp": 1795182750.8826134,
+        "orientation": {
+          "x": 0,
+          "y": 0,
+          "z": 0.9980017515414573,
+          "w": 0.06318626369855551
+        },
+        "norm": 1,
+        "angularVelocity": {
+          "x": 0.001899,
+          "y": 0.01991,
+          "z": 0.5
+        },
+        "linearAcceleration": {
+          "x": 0,
+          "y": 0,
+          "z": 9.80665
+        },
+        "hadEncapsulationHeader": true,
+        "payloadBytes": 324
+      },
+      "assertions": [
+        {
+          "name": "imu.frame_id == \"imu_link\"",
+          "ok": true,
+          "detail": "frame_id=\"imu_link\""
+        },
+        {
+          "name": "imu.orientation is unit length (|q|-1 < 1e-6)",
+          "ok": true,
+          "detail": "|q|-1 = 0"
+        },
+        {
+          "name": "imu.angular_velocity.z == 0.5 rad/s",
+          "ok": true,
+          "detail": "z = 0.5"
+        },
+        {
+          "name": "imu.linear_acceleration.z == 9.80665 m/s^2",
+          "ok": true,
+          "detail": "z = 9.80665"
+        },
+        {
+          "name": "imu.orientation_covariance is float64[9]",
+          "ok": true,
+          "detail": "length=9"
+        },
+        {
+          "name": "imu yaw rate from quaternion ~= 0.5 rad/s",
+          "ok": true,
+          "detail": "samples=1848 mean=0.504075 rad/s maxDeviation=0.292672"
+        }
+      ]
+    },
+    {
+      "topic": "/livox/lidar",
+      "channelId": 7,
+      "schemaName": "sensor_msgs/msg/PointCloud2",
+      "encoding": "cdr",
+      "schemaEncoding": "ros2msg",
+      "count": 132,
+      "bytes": 42259140,
+      "decodeErrors": 0,
+      "decodeErrorSamples": [],
+      "firstLogTimeNs": "1795182750973275765",
+      "lastLogTimeNs": "1795182764072874334",
+      "rateHz": 10,
+      "meanDecodeUs": 63.96,
+      "maxDecodeUs": 4404.1,
+      "sample": {
+        "frameId": "livox_frame",
+        "stamp": 1795182750.9582548,
+        "width": 20000,
+        "height": 1,
+        "pointCount": 20000,
+        "pointStep": 16,
+        "rowStep": 320000,
+        "isDense": true,
+        "fields": [
+          {
+            "name": "x",
+            "offset": 0,
+            "datatype": 7,
+            "count": 1
+          },
+          {
+            "name": "y",
+            "offset": 4,
+            "datatype": 7,
+            "count": 1
+          },
+          {
+            "name": "z",
+            "offset": 8,
+            "datatype": 7,
+            "count": 1
+          },
+          {
+            "name": "intensity",
+            "offset": 12,
+            "datatype": 7,
+            "count": 1
+          }
+        ],
+        "dataBytes": 320000,
+        "radiusMin": 8,
+        "radiusMax": 10,
+        "firstPoints": [
+          [
+            1.5732,
+            9.1566,
+            0.0066
+          ],
+          [
+            -6.3379,
+            -7.2549,
+            1.4722
+          ],
+          [
+            -3.9644,
+            8.5199,
+            0.9945
+          ]
+        ]
+      },
+      "assertions": [
+        {
+          "name": "pointcloud.frame_id == \"livox_frame\"",
+          "ok": true,
+          "detail": "frame_id=\"livox_frame\""
+        },
+        {
+          "name": "pointcloud.point_count == 20000",
+          "ok": true,
+          "detail": "width=20000 height=1 pointStep=16"
+        },
+        {
+          "name": "pointcloud.positions decoded to Float32Array",
+          "ok": true,
+          "detail": "floats=60000"
+        },
+        {
+          "name": "pointcloud radius within [8, 10] m",
+          "ok": true,
+          "detail": "min=8 max=10"
+        },
+        {
+          "name": "pointcloud.intensity field decodable",
+          "ok": true,
+          "detail": "values=20000"
+        }
+      ]
+    },
+    {
+      "topic": "/odom",
+      "channelId": 5,
+      "schemaName": "nav_msgs/msg/Odometry",
+      "encoding": "cdr",
+      "schemaEncoding": "ros2msg",
+      "count": 557,
+      "bytes": 403268,
+      "decodeErrors": 0,
+      "decodeErrorSamples": [],
+      "firstLogTimeNs": "1795182750898037374",
+      "lastLogTimeNs": "1795182764097861375",
+      "rateHz": 42.122,
+      "meanDecodeUs": 12.79,
+      "maxDecodeUs": 287.9,
+      "sample": {
+        "schemaName": "nav_msgs/msg/Odometry",
+        "frameId": "odom",
+        "stamp": 1795182750.8978326,
+        "topLevelFields": [
+          "header",
+          "child_frame_id",
+          "pose",
+          "twist"
+        ],
+        "payloadBytes": 724
+      },
+      "assertions": []
+    },
+    {
+      "topic": "/scan",
+      "channelId": 6,
+      "schemaName": "sensor_msgs/msg/LaserScan",
+      "encoding": "cdr",
+      "schemaEncoding": "ros2msg",
+      "count": 132,
+      "bytes": 198528,
+      "decodeErrors": 0,
+      "decodeErrorSamples": [],
+      "firstLogTimeNs": "1795182750958357322",
+      "lastLogTimeNs": "1795182764058164470",
+      "rateHz": 10,
+      "meanDecodeUs": 15.8,
+      "maxDecodeUs": 244.4,
+      "sample": {
+        "schemaName": "sensor_msgs/msg/LaserScan",
+        "frameId": "livox_frame",
+        "stamp": 1795182750.9579966,
+        "topLevelFields": [
+          "header",
+          "angle_min",
+          "angle_max",
+          "angle_increment",
+          "time_increment",
+          "scan_time",
+          "range_min",
+          "range_max",
+          "ranges",
+          "intensities"
+        ],
+        "payloadBytes": 1504
+      },
+      "assertions": []
+    },
+    {
+      "topic": "/tf",
+      "channelId": 4,
+      "schemaName": "tf2_msgs/msg/TFMessage",
+      "encoding": "cdr",
+      "schemaEncoding": "ros2msg",
+      "count": 560,
+      "bytes": 176960,
+      "decodeErrors": 0,
+      "decodeErrorSamples": [],
+      "firstLogTimeNs": "1795182750898077929",
+      "lastLogTimeNs": "1795182764097954934",
+      "rateHz": 42.349,
+      "meanDecodeUs": 11.08,
+      "maxDecodeUs": 177.1,
+      "sample": {
+        "schemaName": "tf2_msgs/msg/TFMessage",
+        "topLevelFields": [
+          "transforms"
+        ],
+        "payloadBytes": 316
+      },
+      "assertions": []
+    }
+  ],
+  "timeline": [
+    {
+      "at": "2026-11-20T13:52:30.932Z",
+      "kind": "state",
+      "detail": "connecting"
+    },
+    {
+      "at": "2026-11-20T13:52:30.960Z",
+      "kind": "state",
+      "detail": "connected"
+    },
+    {
+      "at": "2026-11-20T13:52:31.372Z",
+      "kind": "connected",
+      "detail": "subprotocol=foxglove.sdk.v1 channels=9 connectMs=29"
+    },
+    {
+      "at": "2026-11-20T13:52:31.373Z",
+      "kind": "subscribed",
+      "detail": "/imu/data, /livox/lidar, /odom, /tf, /scan, /camera/color/image_raw"
+    },
+    {
+      "at": "2026-11-20T13:52:44.048Z",
+      "kind": "state",
+      "detail": "disconnected (code=1005 reason=\"\")"
+    },
+    {
+      "at": "2026-11-20T13:52:44.048Z",
+      "kind": "state",
+      "detail": "reconnecting (attempt 1 in 312ms)"
+    },
+    {
+      "at": "2026-11-20T13:52:44.373Z",
+      "kind": "clientError",
+      "detail": "WebSocket error on ws://127.0.0.1:8765/"
+    },
+    {
+      "at": "2026-11-20T13:52:44.373Z",
+      "kind": "state",
+      "detail": "disconnected (code=1006 reason=\"\")"
+    },
+    {
+      "at": "2026-11-20T13:52:44.373Z",
+      "kind": "state",
+      "detail": "reconnecting (attempt 2 in 692ms)"
+    },
+    {
+      "at": "2026-11-20T13:52:44.373Z",
+      "kind": "clientError",
+      "detail": "connection closed during connect (code=1006 reason=\"\")"
+    },
+    {
+      "at": "2026-11-20T13:52:45.067Z",
+      "kind": "clientError",
+      "detail": "WebSocket error on ws://127.0.0.1:8765/"
+    },
+    {
+      "at": "2026-11-20T13:52:45.067Z",
+      "kind": "state",
+      "detail": "disconnected (code=1006 reason=\"\")"
+    },
+    {
+      "at": "2026-11-20T13:52:45.067Z",
+      "kind": "state",
+      "detail": "reconnecting (attempt 3 in 1287ms)"
+    },
+    {
+      "at": "2026-11-20T13:52:45.067Z",
+      "kind": "clientError",
+      "detail": "connection closed during connect (code=1006 reason=\"\")"
+    },
+    {
+      "at": "2026-11-20T13:52:46.367Z",
+      "kind": "clientError",
+      "detail": "WebSocket error on ws://127.0.0.1:8765/"
+    },
+    {
+      "at": "2026-11-20T13:52:46.367Z",
+      "kind": "state",
+      "detail": "disconnected (code=1006 reason=\"\")"
+    },
+    {
+      "at": "2026-11-20T13:52:46.367Z",
+      "kind": "state",
+      "detail": "reconnecting (attempt 4 in 2430ms)"
+    },
+    {
+      "at": "2026-11-20T13:52:46.367Z",
+      "kind": "clientError",
+      "detail": "connection closed during connect (code=1006 reason=\"\")"
+    },
+    {
+      "at": "2026-11-20T13:52:48.802Z",
+      "kind": "clientError",
+      "detail": "WebSocket error on ws://127.0.0.1:8765/"
+    },
+    {
+      "at": "2026-11-20T13:52:48.802Z",
+      "kind": "state",
+      "detail": "disconnected (code=1006 reason=\"\")"
+    },
+    {
+      "at": "2026-11-20T13:52:48.802Z",
+      "kind": "state",
+      "detail": "reconnecting (attempt 5 in 3038ms)"
+    },
+    {
+      "at": "2026-11-20T13:52:48.802Z",
+      "kind": "clientError",
+      "detail": "connection closed during connect (code=1006 reason=\"\")"
+    },
+    {
+      "at": "2026-11-20T13:52:51.374Z",
+      "kind": "state",
+      "detail": "closed (probe finished)"
+    }
+  ],
+  "missingRequiredTopics": [],
+  "failedAssertions": [],
+  "passed": true
+}

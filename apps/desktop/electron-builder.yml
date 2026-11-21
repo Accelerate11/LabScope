@@ -1,0 +1,56 @@
+appId: com.labscope.desktop
+productName: LabScope
+copyright: Copyright © 2026 LabScope
+
+directories:
+  output: release
+  buildResources: build
+
+files:
+  - out/**/*
+  - package.json
+
+asar: true
+
+electronFuses:
+  runAsNode: false
+  enableNodeOptionsEnvironmentVariable: false
+  enableNodeCliInspectArguments: false
+  enableEmbeddedAsarIntegrityValidation: true
+  onlyLoadAppFromAsar: true
+
+win:
+  target:
+    - target: nsis
+      arch:
+        - x64
+  artifactName: LabScope-${version}-windows-${arch}-unsigned.${ext}
+
+linux:
+  executableName: labscope
+  artifactName: LabScope-${version}-linux-${arch}.${ext}
+  syncDesktopName: true
+  maintainer: LabScope maintainers <261739268+Accelerate11@users.noreply.github.com>
+  target:
+    - target: AppImage
+      arch:
+        - x64
+    - target: deb
+      arch:
+        - x64
+  category: Science
+
+deb:
+  packageName: labscope
+
+nsis:
+  oneClick: false
+  perMachine: false
+  allowElevation: true
+  # M1 has no electron-updater integration.
+  packElevateHelper: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  shortcutName: LabScope
+  deleteAppDataOnUninstall: false

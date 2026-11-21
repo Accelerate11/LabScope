@@ -1,0 +1,121 @@
+import React from 'react';
+import { Placeholder } from '../components/Placeholder';
+import { PlaybackControls } from '../spatial/PlaybackControls';
+import { Workspace } from '../workspace/Workspace';
+import type { ExperimentManifest, RecordingStatus } from '../../../shared/recording-types';
+import { useAppStore } from '../store';
+import type { AiProviderConfig, AiProviderInput } from '../../../shared/ai-types';
+import { buildLocalContext } from '../ai/local-analysis';
+
+export function DataPage(): React.JSX.Element {
+  const status = useAppStore((state) => state.status);
+  const [recording, setRecording] = React.useState<RecordingStatus>();
+  const [experiments, setExperiments] = React.useState<ExperimentManifest[]>([]);
+  const [name, setName] = React.useState('Simulation Experiment');
+  const [project, setProject] = React.useState('LabScope');
+  const [selected, setSelected] = React.useState<string[]>([]);
+  const load = React.useCallback(async () => setExperiments(await window.labscope.recordingList()), []);
+  React.useEffect(() => { void load(); return window.labscope.onRecordingStatus(setRecording); }, [load]);
+  const button = 'focus-ring rounded border border-border px-2 py-1 text-xs hover:border-accent disabled:opacity-40';
+  const field = 'focus-ring rounded border border-border bg-bg px-2 py-1 text-xs text-ink';
+  const active = recording && recording.state !== 'idle' && recording.state !== 'error';
+  return <div className="flex h-full min-h-0 flex-col gap-3 overflow-auto p-3 text-xs text-muted">
+    <section className="rounded border border-border p-3">
+      <h1 className="mb-2 text-sm font-semibold text-ink">实验数据中心</h1>
+      <div className="flex flex-wrap items-end gap-2">
+        <label className="grid gap-1">实验名称<input className={field} value={name} onChange={(e) => setName(e.target.value)} /></label>
+        <label className="grid gap-1">项目<input className={field} value={project} onChange={(e) => setProject(e.target.value)} /></label>
+        <button className={button} disabled={!!active} onClick={async () => {
+          const topics = selected.length ? selected : status.channels.map(({ topic }) => topic);
+          setRecording(await window.labscope.recordingStart({ name, project, compression: 'none' }, topics));
+        }}>开始录制</button>
+        <button className={button} disabled={!active || recording?.state !== 'recording'} onClick={async () => setRecording(await window.labscope.recordingPause())}>暂停</button>
+        <button className={button} disabled={recording?.state !== 'paused'} onClick={async () => setRecording(await window.labscope.recordingResume())}>继续</button>
+        <button className={button} disabled={!active} onClick={async () => { setRecording(await window.labscope.recordingStop()); await load(); }}>停止并保存</button>
+        <span className="mono">{recording ? recording.state + ' · ' + recording.messageCount + ' msgs · queue ' + recording.queueDepth : '未录制'}</span>
+      </div>
+      {recording?.error && <p role="alert" className="mt-2 text-danger">{recording.error}</p>}
+      <div className="mt-3 grid max-h-36 grid-cols-2 gap-1 overflow-auto">
+        {status.channels.map((channel) => <label key={channel.topic} className="flex items-center gap-1">
+          <input type="checkbox" checked={selected.includes(channel.topic)} onChange={(e) => setSelected((current) =>
+            e.target.checked ? [...current, channel.topic] : current.filter((topic) => topic !== channel.topic))} />
+          {channel.topic} <span className="text-faint">{channel.schemaName}</span>
+        </label>)}
+      </div>
+    </section>
+    <section className="rounded border border-border p-3">
+      <div className="mb-2 flex items-center justify-between"><h2 className="font-semibold text-ink">实验列表</h2><button className={button} onClick={() => void load()}>刷新</button></div>
+      <div className="grid gap-2">
+        {experiments.map((experiment) => <article key={experiment.experimentId} className="rounded border border-border/70 p-2">
+          <div className="flex flex-wrap justify-between gap-2"><strong className="text-ink">{experiment.name}</strong><span>{experiment.project} · {experiment.compression}</span></div>
+          <div className="mono text-[10px]">{experiment.experimentId} · segments {experiment.segments.length} · events {experiment.events.length}</div>
+          {experiment.notes && <p>{experiment.notes}</p>}
+        </article>)}
+        {!experiments.length && <p className="text-faint">暂无已完成实验。</p>}
+      </div>
+    </section>
+  </div>;
+}
+
+export function PlaybackPage(): React.JSX.Element {
+  return (
+    <div className="flex h-full min-h-0 flex-col gap-2 p-2">
+      <PlaybackControls />
+      <Workspace />
+    </div>
+  );
+}
+
+export function AiPage(): React.JSX.Element {
+  const [providers, setProviders] = React.useState<AiProviderConfig[]>([]);
+  const [experiments, setExperiments] = React.useState<ExperimentManifest[]>([]);
+  const [providerId, setProviderId] = React.useState('');
+  const [experimentId, setExperimentId] = React.useState('');
+  const [prompt, setPrompt] = React.useState('请总结这次实验的基本信息，并区分已确认事实和未知信息。');
+  const [answer, setAnswer] = React.useState('');
+  const [error, setError] = React.useState('');
+  const [providerForm, setProviderForm] = React.useState<AiProviderInput>({ name: '', kind: 'openai-compatible', baseUrl: 'https://api.openai.com/v1', model: '', apiKey: '', enabled: true });
+  React.useEffect(() => {
+    void Promise.all([window.labscope.aiProviders(), window.labscope.recordingList()]).then(([p, e]) => {
+      setProviders(p); setExperiments(e); setProviderId(p[0]?.id ?? ''); setExperimentId(e[0]?.experimentId ?? '');
+    }).catch((cause) => setError(String(cause)));
+  }, []);
+  const experiment = experiments.find((item) => item.experimentId === experimentId);
+  const button = 'focus-ring rounded border border-border px-2 py-1 text-xs hover:border-accent disabled:opacity-40';
+  const field = 'focus-ring rounded border border-border bg-bg px-2 py-1 text-xs text-ink';
+  return <div className="flex h-full min-h-0 flex-col gap-3 overflow-auto p-3 text-xs text-muted">
+    <section className="rounded border border-border p-3">
+      <h1 className="mb-2 text-sm font-semibold text-ink">AI Analysis Workspace</h1>
+      <div className="flex flex-wrap gap-2">
+        <select className={field} value={experimentId} onChange={(e) => setExperimentId(e.target.value)}>
+          <option value="">选择实验</option>{experiments.map((item) => <option key={item.experimentId} value={item.experimentId}>{item.name}</option>)}
+        </select>
+        <select className={field} value={providerId} onChange={(e) => setProviderId(e.target.value)}>
+          <option value="">选择模型</option>{providers.map((item) => <option key={item.id} value={item.id}>{item.name} · {item.model}</option>)}
+        </select>
+        <button className={button} disabled={!providerId} onClick={async () => {
+          const result = await window.labscope.aiProviderTest(providerId); setAnswer(result.message); setError(result.ok ? '' : result.message);
+        }}>测试 Provider</button>
+        <input className={field} placeholder="Provider 名称" value={providerForm.name} onChange={(e) => setProviderForm({ ...providerForm, name: e.target.value })} />
+        <input className={field} placeholder="模型" value={providerForm.model} onChange={(e) => setProviderForm({ ...providerForm, model: e.target.value })} />
+        <input className={field} placeholder="API Base URL" value={providerForm.baseUrl} onChange={(e) => setProviderForm({ ...providerForm, baseUrl: e.target.value })} />
+        <input className={field} placeholder="API Key（Windows 加密存储）" type="password" value={providerForm.apiKey} onChange={(e) => setProviderForm({ ...providerForm, apiKey: e.target.value })} />
+        <button className={button} disabled={!providerForm.name || !providerForm.model || !providerForm.apiKey} onClick={async () => {
+          try { const next = await window.labscope.aiProviderUpsert(providerForm); setProviders(next); setProviderId(next.at(-1)?.id ?? ''); setProviderForm({ ...providerForm, apiKey: '' }); }
+          catch (cause) { setError(cause instanceof Error ? cause.message : String(cause)); }
+        }}>保存 Provider</button>
+      </div>
+      <textarea className={field + ' mt-2 min-h-20 w-full'} value={prompt} onChange={(e) => setPrompt(e.target.value)} />
+      <button className={button + ' mt-2'} disabled={!providerId || !experiment} onClick={async () => {
+        try { setError(''); const result = await window.labscope.aiChat(providerId, buildLocalContext(experiment!) + '\n\nUser question: ' + prompt); setAnswer(result.text); }
+        catch (cause) { setError(cause instanceof Error ? cause.message : String(cause)); }
+      }}>分析实验</button>
+      {error && <p role="alert" className="mt-2 text-danger">{error}</p>}
+      {answer && <pre className="mt-2 max-h-72 overflow-auto whitespace-pre-wrap rounded border border-border bg-bg p-2 text-ink">{answer}</pre>}
+    </section>
+    <section className="rounded border border-border p-3">
+      <h2 className="mb-2 font-semibold text-ink">本地实验上下文</h2>
+      {experiment ? <pre className="whitespace-pre-wrap">{buildLocalContext(experiment)}</pre> : <p>暂无实验。录制或导入一个实验后可分析。</p>}
+    </section>
+  </div>;
+}

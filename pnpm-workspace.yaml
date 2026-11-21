@@ -1,0 +1,13 @@
+packages:
+  - 'packages/*'
+  - 'tools/*'
+  - 'apps/*'
+
+# Electron's postinstall downloads the platform binary. Squirrel is unused.
+allowBuilds:
+  electron: true
+  electron-builder: true
+  esbuild: true
+  electron-winstaller: false
+
+verifyDepsBeforeRun: false

@@ -1,0 +1,71 @@
+name: Build desktop packages
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  desktop:
+    name: Build ${{ matrix.platform }} x64
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { platform: windows, runner: windows-2025, artifact: LabScope-windows-x64-unsigned }
+          - { platform: linux, runner: ubuntu-24.04, artifact: LabScope-linux-x64 }
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24.16.0
+          package-manager-cache: false
+      - run: corepack enable pnpm
+      - run: pnpm install --frozen-lockfile --ignore-scripts
+      - run: pnpm -r build
+      - run: pnpm -r typecheck
+      - run: pnpm test
+      - run: pnpm test:runtime
+      - if: matrix.platform == 'windows'
+        run: pnpm --filter @labscope/desktop package
+      - if: matrix.platform == 'windows'
+        run: pnpm test:integration ./apps/desktop/release/win-unpacked/LabScope.exe
+      - if: matrix.platform == 'linux'
+        shell: bash
+        env:
+          PACKAGE_HOMEPAGE: ${{ github.server_url }}/${{ github.repository }}
+          PACKAGE_MAINTAINER: ${{ vars.LABSCOPE_DEB_MAINTAINER || format('LabScope maintainers <{0}+{1}@users.noreply.github.com>', github.repository_owner_id, github.repository_owner) }}
+        run: |
+          pnpm --filter @labscope/desktop package:linux \
+            "-c.extraMetadata.homepage=$PACKAGE_HOMEPAGE" \
+            "-c.linux.maintainer=$PACKAGE_MAINTAINER"
+          pnpm test:integration
+      - name: Write package checksums
+        shell: bash
+        working-directory: apps/desktop/release
+        run: |
+          shopt -s nullglob
+          if [[ "$RUNNER_OS" == Windows ]]; then
+            packages=(*-unsigned.exe)
+            [[ "${#packages[@]}" -eq 1 ]]
+          else
+            packages=(*.AppImage *.deb)
+            [[ "${#packages[@]}" -eq 2 ]]
+          fi
+          sha256sum -- "${packages[@]}" > SHA256SUMS.txt
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: ${{ matrix.artifact }}
+          if-no-files-found: error
+          path: |
+            apps/desktop/release/*-unsigned.exe
+            apps/desktop/release/*.AppImage
+            apps/desktop/release/*.deb
+            apps/desktop/release/SHA256SUMS.txt

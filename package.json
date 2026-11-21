@@ -1,0 +1,36 @@
+{
+  "name": "labscope",
+  "version": "0.1.0-m0",
+  "private": true,
+  "type": "module",
+  "description": "LabScope Desktop - robotics data workstation (Windows first)",
+  "packageManager": "pnpm@11.28.5",
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "scripts": {
+    "build": "pnpm -r build",
+    "test": "vitest run",
+    "test:runtime": "node --experimental-vm-modules apps/desktop/test/runtime.cjs",
+    "test:integration": "node apps/desktop/test/integration.mjs",
+    "test:panel-ui": "node apps/desktop/test/panel-ui.mjs",
+    "test:simulation-ui": "node apps/desktop/test/simulation-ui.mjs",
+    "test:pointcloud-ui": "node apps/desktop/test/pointcloud-ui.mjs",
+    "test:pointcloud-fixture": "node apps/desktop/test/panel-ui.mjs --pointcloud",
+    "test:mcap-ui": "node apps/desktop/test/panel-ui.mjs --mcap",
+    "test:m23-ui": "node apps/desktop/test/panel-ui.mjs --m23",
+    "test:mcap-packaged": "node apps/desktop/test/mcap-packaged.mjs",
+    "fixture:simulation-mcap": "node apps/desktop/test/make-mcap.mjs",
+    "bench:simulation": "node --expose-gc packages/simulation-engine/test/benchmark.mjs",
+    "test:watch": "vitest",
+    "typecheck": "pnpm -r typecheck",
+    "m0:probe": "node tools/m0-probe/dist/index.js"
+  },
+  "devDependencies": {
+    "@types/node": "24.19.2",
+    "@types/ws": "8.18.2",
+    "typescript": "5.9.3",
+    "vitest": "5.1.1",
+    "ws": "8.23.0"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "name": "@labscope/desktop",
+  "version": "0.1.0-m2.4",
+  "private": true,
+  "type": "module",
+  "description": "LabScope Desktop - Windows robotics data workstation",
+  "homepage": "https://github.com/Accelerate11/LabScope",
+  "desktopName": "labscope.desktop",
+  "main": "./out/main/index.js",
+  "author": "LabScope",
+  "scripts": {
+    "dev": "electron-vite dev",
+    "build": "electron-vite build",
+    "preview": "electron-vite preview",
+    "package": "electron-builder --win --x64 --publish never",
+    "package:linux": "electron-builder --linux --x64 --publish never",
+    "typecheck": "tsc -p tsconfig.node.json --noEmit && tsc -p tsconfig.web.json --noEmit",
+    "smoke": "electron . --smoke"
+  },
+  "devDependencies": {
+    "@labscope/data-source": "workspace:*",
+    "@labscope/ros-protocol": "workspace:*",
+    "@labscope/ros-schema": "workspace:*",
+    "@labscope/simulation-engine": "workspace:*",
+    "@mcap/core": "2.4.0",
+    "@tailwindcss/vite": "4.3.5",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@types/three": "0.187.0",
+    "@vitejs/plugin-react": "6.3.0",
+    "electron": "45.4.1",
+    "electron-builder": "26.18.0",
+    "electron-vite": "6.0.0",
+    "fzstd": "0.1.1",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "tailwindcss": "4.3.5",
+    "three": "0.187.0",
+    "typescript": "5.9.3",
+    "vite": "8.3.8",
+    "zustand": "5.1.0"
+  }
+}

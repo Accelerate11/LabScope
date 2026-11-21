@@ -1,0 +1,386 @@
+{
+  "label": "m0-rerun",
+  "startedAt": "2026-11-20T13:50:45.161Z",
+  "finishedAt": "2026-11-20T13:51:05.620Z",
+  "url": "ws://127.0.0.1:8765",
+  "subprotocol": "foxglove.sdk.v1",
+  "serverInfo": {
+    "op": "serverInfo",
+    "name": "",
+    "capabilities": [
+      "clientPublish",
+      "connectionGraph",
+      "parameters",
+      "parametersSubscribe",
+      "services",
+      "assets"
+    ],
+    "supportedEncodings": [
+      "cdr",
+      "json"
+    ],
+    "metadata": {
+      "ROS_DISTRO": "humble",
+      "fg-library": "foxglove-bridge/3.6.3 foxglove-sdk-cpp/0.30.2"
+    },
+    "sessionId": "1795182636438"
+  },
+  "connectMs": 32.17,
+  "durationSeconds": 20,
+  "channelCount": 9,
+  "channels": [
+    {
+      "id": 9,
+      "topic": "/camera/color/image_raw",
+      "encoding": "cdr",
+      "schemaEncoding": "ros2msg",
+      "schemaName": "sensor_msgs/msg/Image",
+      "schemaBytes": 2391
+    },
+    {
+      "id": 1,
+      "topic": "/foxglove_bridge/sysinfo",
+      "encoding": "json",
+      "schemaEncoding": "jsonschema",
+      "schemaName": "foxglove.SystemInfo",
+      "schemaBytes": 2214
+    },
+    {
+      "id": 8,
+      "topic": "/imu/data",
+      "encoding": "cdr",
+      "schemaEncoding": "ros2msg",
+      "schemaName": "sensor_msgs/msg/Imu",
+      "schemaBytes": 2755
+    },
+    {
+      "id": 7,
+      "topic": "/livox/lidar",
+      "encoding": "cdr",
+      "schemaEncoding": "ros2msg",
+      "schemaName": "sensor_msgs/msg/PointCloud2",
+      "schemaBytes": 2598
+    },
+    {
+      "id": 5,
+      "topic": "/odom",
+      "encoding": "cdr",
+      "schemaEncoding": "ros2msg",
+      "schemaName": "nav_msgs/msg/Odometry",
+      "schemaBytes": 3718
+    },
+    {
+      "id": 3,
+      "topic": "/parameter_events",
+      "encoding": "cdr",
+      "schemaEncoding": "ros2msg",
+      "schemaName": "rcl_interfaces/msg/ParameterEvent",
+      "schemaBytes": 2722
+    },
+    {
+      "id": 2,
+      "topic": "/rosout",
+      "encoding": "cdr",
+      "schemaEncoding": "ros2msg",
+      "schemaName": "rcl_interfaces/msg/Log",
+      "schemaBytes": 2065
+    },
+    {
+      "id": 6,
+      "topic": "/scan",
+      "encoding": "cdr",
+      "schemaEncoding": "ros2msg",
+      "schemaName": "sensor_msgs/msg/LaserScan",
+      "schemaBytes": 2549
+    },
+    {
+      "id": 4,
+      "topic": "/tf",
+      "encoding": "cdr",
+      "schemaEncoding": "ros2msg",
+      "schemaName": "tf2_msgs/msg/TFMessage",
+      "schemaBytes": 2673
+    }
+  ],
+  "subscribedTopics": [
+    "/imu/data",
+    "/livox/lidar",
+    "/odom",
+    "/tf",
+    "/scan",
+    "/camera/color/image_raw"
+  ],
+  "clientStats": {
+    "messagesReceived": 5055,
+    "bytesReceived": 123563103,
+    "framesReceived": 5058,
+    "decodeErrors": 0,
+    "connects": 1,
+    "reconnects": 0,
+    "lastMessageAt": 1795182665615
+  },
+  "topicStats": [
+    {
+      "topic": "/camera/color/image_raw",
+      "channelId": 9,
+      "schemaName": "sensor_msgs/msg/Image",
+      "encoding": "cdr",
+      "schemaEncoding": "ros2msg",
+      "count": 78,
+      "bytes": 71890416,
+      "decodeErrors": 0,
+      "decodeErrorSamples": [],
+      "firstLogTimeNs": "1795182645579074536",
+      "lastLogTimeNs": "1795182665523567023",
+      "rateHz": 3.861,
+      "meanDecodeUs": 38.39,
+      "maxDecodeUs": 656.5,
+      "sample": {
+        "schemaName": "sensor_msgs/msg/Image",
+        "frameId": "camera_color_optical_frame",
+        "stamp": 1795182645.530618,
+        "topLevelFields": [
+          "header",
+          "height",
+          "width",
+          "encoding",
+          "is_bigendian",
+          "step",
+          "data"
+        ],
+        "payloadBytes": 921672
+      },
+      "assertions": []
+    },
+    {
+      "topic": "/imu/data",
+      "channelId": 8,
+      "schemaName": "sensor_msgs/msg/Imu",
+      "encoding": "cdr",
+      "schemaEncoding": "ros2msg",
+      "count": 3112,
+      "bytes": 1008288,
+      "decodeErrors": 3112,
+      "decodeErrorSamples": [
+        "SchemaParseError: cannot parse field declaration \"float64 x 0\" in geometry_msgs/msg/Quaternion",
+        "SchemaParseError: cannot parse field declaration \"float64 x 0\" in geometry_msgs/msg/Quaternion",
+        "SchemaParseError: cannot parse field declaration \"float64 x 0\" in geometry_msgs/msg/Quaternion"
+      ],
+      "firstLogTimeNs": "1795182645475289763",
+      "lastLogTimeNs": "1795182665620181425",
+      "rateHz": 154.431,
+      "meanDecodeUs": 93.74,
+      "maxDecodeUs": 717.2,
+      "sample": null,
+      "assertions": []
+    },
+    {
+      "topic": "/livox/lidar",
+      "channelId": 7,
+      "schemaName": "sensor_msgs/msg/PointCloud2",
+      "encoding": "cdr",
+      "schemaEncoding": "ros2msg",
+      "count": 155,
+      "bytes": 49622475,
+      "decodeErrors": 0,
+      "decodeErrorSamples": [],
+      "firstLogTimeNs": "1795182645607747190",
+      "lastLogTimeNs": "1795182665540175815",
+      "rateHz": 7.726,
+      "meanDecodeUs": 75.09,
+      "maxDecodeUs": 4528.5,
+      "sample": {
+        "frameId": "livox_frame",
+        "stamp": 1795182645.5908654,
+        "width": 20000,
+        "height": 1,
+        "pointCount": 20000,
+        "pointStep": 16,
+        "rowStep": 320000,
+        "isDense": true,
+        "fields": [
+          {
+            "name": "x",
+            "offset": 0,
+            "datatype": 7,
+            "count": 1
+          },
+          {
+            "name": "y",
+            "offset": 4,
+            "datatype": 7,
+            "count": 1
+          },
+          {
+            "name": "z",
+            "offset": 8,
+            "datatype": 7,
+            "count": 1
+          },
+          {
+            "name": "intensity",
+            "offset": 12,
+            "datatype": 7,
+            "count": 1
+          }
+        ],
+        "dataBytes": 320000,
+        "radiusMin": 8,
+        "radiusMax": 10,
+        "firstPoints": [
+          [
+            -7.7757,
+            -5.0849,
+            0.0066
+          ],
+          [
+            9.6287,
+            0.3011,
+            1.4722
+          ],
+          [
+            -3.5378,
+            -8.7057,
+            0.9945
+          ]
+        ]
+      },
+      "assertions": [
+        {
+          "name": "pointcloud.frame_id == \"livox_frame\"",
+          "ok": true,
+          "detail": "frame_id=\"livox_frame\""
+        },
+        {
+          "name": "pointcloud.point_count == 20000",
+          "ok": true,
+          "detail": "width=20000 height=1 pointStep=16"
+        },
+        {
+          "name": "pointcloud.positions decoded to Float32Array",
+          "ok": true,
+          "detail": "floats=60000"
+        },
+        {
+          "name": "pointcloud radius within [8, 10] m",
+          "ok": true,
+          "detail": "min=8 max=10"
+        },
+        {
+          "name": "pointcloud.intensity field decodable",
+          "ok": true,
+          "detail": "values=20000"
+        }
+      ]
+    },
+    {
+      "topic": "/odom",
+      "channelId": 5,
+      "schemaName": "nav_msgs/msg/Odometry",
+      "encoding": "cdr",
+      "schemaEncoding": "ros2msg",
+      "count": 778,
+      "bytes": 563272,
+      "decodeErrors": 778,
+      "decodeErrorSamples": [
+        "SchemaParseError: cannot parse field declaration \"float64 x 0\" in geometry_msgs/msg/Quaternion",
+        "SchemaParseError: cannot parse field declaration \"float64 x 0\" in geometry_msgs/msg/Quaternion",
+        "SchemaParseError: cannot parse field declaration \"float64 x 0\" in geometry_msgs/msg/Quaternion"
+      ],
+      "firstLogTimeNs": "1795182645490611619",
+      "lastLogTimeNs": "1795182665615285878",
+      "rateHz": 38.609,
+      "meanDecodeUs": 59.57,
+      "maxDecodeUs": 230.5,
+      "sample": null,
+      "assertions": []
+    },
+    {
+      "topic": "/scan",
+      "channelId": 6,
+      "schemaName": "sensor_msgs/msg/LaserScan",
+      "encoding": "cdr",
+      "schemaEncoding": "ros2msg",
+      "count": 155,
+      "bytes": 233120,
+      "decodeErrors": 0,
+      "decodeErrorSamples": [],
+      "firstLogTimeNs": "1795182645625628071",
+      "lastLogTimeNs": "1795182665560389988",
+      "rateHz": 7.725,
+      "meanDecodeUs": 33.52,
+      "maxDecodeUs": 239.5,
+      "sample": {
+        "schemaName": "sensor_msgs/msg/LaserScan",
+        "frameId": "livox_frame",
+        "stamp": 1795182645.6254501,
+        "topLevelFields": [
+          "header",
+          "angle_min",
+          "angle_max",
+          "angle_increment",
+          "time_increment",
+          "scan_time",
+          "range_min",
+          "range_max",
+          "ranges",
+          "intensities"
+        ],
+        "payloadBytes": 1504
+      },
+      "assertions": []
+    },
+    {
+      "topic": "/tf",
+      "channelId": 4,
+      "schemaName": "tf2_msgs/msg/TFMessage",
+      "encoding": "cdr",
+      "schemaEncoding": "ros2msg",
+      "count": 777,
+      "bytes": 245532,
+      "decodeErrors": 777,
+      "decodeErrorSamples": [
+        "SchemaParseError: cannot parse field declaration \"float64 x 0\" in geometry_msgs/msg/Quaternion",
+        "SchemaParseError: cannot parse field declaration \"float64 x 0\" in geometry_msgs/msg/Quaternion",
+        "SchemaParseError: cannot parse field declaration \"float64 x 0\" in geometry_msgs/msg/Quaternion"
+      ],
+      "firstLogTimeNs": "1795182645500518490",
+      "lastLogTimeNs": "1795182665605382577",
+      "rateHz": 38.598,
+      "meanDecodeUs": 50.71,
+      "maxDecodeUs": 386.4,
+      "sample": null,
+      "assertions": []
+    }
+  ],
+  "timeline": [
+    {
+      "at": "2026-11-20T13:50:45.162Z",
+      "kind": "state",
+      "detail": "connecting"
+    },
+    {
+      "at": "2026-11-20T13:50:45.193Z",
+      "kind": "state",
+      "detail": "connected"
+    },
+    {
+      "at": "2026-11-20T13:50:45.615Z",
+      "kind": "connected",
+      "detail": "subprotocol=foxglove.sdk.v1 channels=9 connectMs=32"
+    },
+    {
+      "at": "2026-11-20T13:50:45.616Z",
+      "kind": "subscribed",
+      "detail": "/imu/data, /livox/lidar, /odom, /tf, /scan, /camera/color/image_raw"
+    },
+    {
+      "at": "2026-11-20T13:51:05.619Z",
+      "kind": "state",
+      "detail": "closed (probe finished)"
+    }
+  ],
+  "missingRequiredTopics": [],
+  "failedAssertions": [],
+  "passed": false
+}
