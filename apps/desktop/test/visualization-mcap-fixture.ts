@@ -3,10 +3,16 @@ import { parseMsgDefinitionText, type FieldType } from '@labscope/ros-schema';
 import { SimulationDataSource } from '@labscope/simulation-engine';
 import type { MessageEnvelope } from '@labscope/data-source';
 import { CdrWriter } from '../../../packages/ros-schema/test/helpers/cdr-writer';
-import cloud from '../../../docs/m0/artifacts/schemas/livox_lidar.sensor_msgs_msg_PointCloud2.ros2msg.txt?raw';
-import tf from '../../../docs/m0/artifacts/schemas/tf.tf2_msgs_msg_TFMessage.ros2msg.txt?raw';
-import odom from '../../../docs/m0/artifacts/schemas/odom.nav_msgs_msg_Odometry.ros2msg.txt?raw';
-import imu from '../../../docs/m0/artifacts/schemas/imu_data.sensor_msgs_msg_Imu.ros2msg.txt?raw';
+import cloudRaw from '../../../docs/m0/artifacts/schemas/livox_lidar.sensor_msgs_msg_PointCloud2.ros2msg.txt?raw';
+import tfRaw from '../../../docs/m0/artifacts/schemas/tf.tf2_msgs_msg_TFMessage.ros2msg.txt?raw';
+import odomRaw from '../../../docs/m0/artifacts/schemas/odom.nav_msgs_msg_Odometry.ros2msg.txt?raw';
+import imuRaw from '../../../docs/m0/artifacts/schemas/imu_data.sensor_msgs_msg_Imu.ros2msg.txt?raw';
+
+const normalize = (value: string): string => value.replace(/\r\n/g, '\n');
+const cloud = normalize(cloudRaw);
+const tf = normalize(tfRaw);
+const odom = normalize(odomRaw);
+const imu = normalize(imuRaw);
 
 const sep = '================================================================================\n';
 const header = sep + imu.split(sep).filter((entry) => /^MSG: (std_msgs\/Header|builtin_interfaces\/Time)\s/m.test(entry)).join(sep);

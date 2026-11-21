@@ -5,7 +5,7 @@ import { decodeMessage, decodePointCloud2, parseMsgDefinitionText, type FieldTyp
 import { CdrWriter } from '../../ros-schema/test/helpers/cdr-writer';
 import { SimulationDataSource } from '../src/index';
 
-const captured = (name: string) => readFileSync(new URL('../../../docs/m0/artifacts/schemas/' + name, import.meta.url), 'utf8');
+const captured = (name: string) => readFileSync(new URL('../../../docs/m0/artifacts/schemas/' + name, import.meta.url), 'utf8').replace(/\r\n/g, '\n');
 const separator = '================================================================================\n';
 const imu = captured('imu_data.sensor_msgs_msg_Imu.ros2msg.txt');
 const odom = captured('odom.nav_msgs_msg_Odometry.ros2msg.txt');
