@@ -1,6 +1,6 @@
 {
   "name": "@labscope/desktop",
-  "version": "0.1.0-m2.4",
+  "version": "0.1.0-beta.1",
   "private": true,
   "type": "module",
   "description": "LabScope Desktop - Windows robotics data workstation",
