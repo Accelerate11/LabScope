@@ -8,7 +8,7 @@ This report records the repository preparation for the first public source push 
 - Branch: `main`
 - Commit message: `Initial public source release: LabScope V1 foundation`
 - Source commit: `416461bd5c2f33e99cd5eb35e065d7fbca4fd903`
-- Pushed branch head after preserving the remote placeholder history: `1e9c4b40736ad09c826a3e5c73bf5a532ba9005e`
+- Source correction commit after preserving the remote placeholder history: `1e9c4b40736ad09c826a3e5c73bf5a532ba9005e`
 - Source root: `D:/LabScope/source/labOS`
 
 ## Included source scope
