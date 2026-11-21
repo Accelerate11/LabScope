@@ -8,7 +8,7 @@ This report records the repository preparation for the first public source push 
 - Branch: `main`
 - Commit message: `Initial public source release: LabScope V1 foundation`
 - Source commit: `416461bd5c2f33e99cd5eb35e065d7fbca4fd903`
-- Pushed branch head after preserving the remote placeholder history: `1fa2247b4e7f2f850e29031e0b92f93622f0f11a`
+- Pushed branch head after preserving the remote placeholder history: `1e9c4b40736ad09c826a3e5c73bf5a532ba9005e`
 - Source root: `D:/LabScope/source/labOS`
 
 ## Included source scope
@@ -43,6 +43,8 @@ Windows packages are unsigned by project policy. No Windows security policy was 
 `.github/workflows/build.yml` runs build, typecheck, unit tests, runtime checks, and platform packaging on pushes and pull requests. Windows artifacts are explicitly named unsigned. The workflow does not publish a GitHub Release automatically.
 
 The first source push completed with `git push -u origin main`. No force push was used.
+
+After the first CI run exposed Windows CRLF fixture handling, commit `1e9c4b4` normalized schema fixture line endings. Local tests and type checks passed before that corrective push.
 
 ## License status
 
