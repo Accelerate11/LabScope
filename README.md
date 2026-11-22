@@ -1,8 +1,8 @@
 # LabScope
 
-LabScope is an open-source robotics experiment workstation for visualization, recording, playback, and AI-assisted analysis. It is designed for research teams that need a local-first desktop workflow around ROS 2 data.
+LabScope is a local-first robotics experiment workstation for visualization, recording, playback, and AI-assisted analysis of ROS 2 data.
 
-Current status is **V1 Foundation / Development Release**. This repository describes only capabilities that are implemented or explicitly marked as planned.
+The desktop version is **0.1.0-beta.1**, a local release candidate. Public downloads are pending license and redistribution review. [GitHub Releases](https://github.com/Accelerate11/LabScope/releases) · [Beta release status](docs/release/PUBLIC_BETA_RELEASE_REPORT.md)
 
 ## Core features
 

@@ -2,9 +2,9 @@
 
 ## Release status
 
-This release preparation targets a GitHub pre-release for LabScope, an open-source robotics experiment workstation for visualization, recording, playback, and AI-assisted experiment analysis.
+LabScope is a local-first robotics experiment workstation for visualization, recording, playback, and AI-assisted experiment analysis.
 
-The current repository is prepared as a **release candidate under a license gate**. A public GitHub Release must wait until source ownership and third-party binary distribution obligations are confirmed.
+The public pre-release is pending source ownership, license approval, and third-party redistribution review.
 
 ## Implemented capabilities
 
@@ -13,9 +13,10 @@ The current repository is prepared as a **release candidate under a license gate
 - PointCloud2, RGB-D, TF, pose, path, marker, plot, and shared timeline visualization
 - Indexed uncompressed MCAP recording and uncompressed/Zstd playback
 - Recording pause/resume, segmentation, manifests, events, and SHA-256
-- Deterministic MCAP analysis, log parsing, read-only analysis tools, and evidence-oriented reports
+- Deterministic indexed MCAP analysis for topic timing, IMU magnitudes, and point-cloud counts
+- Local text log parsing and clustering, a read-only tool registry, and evidence-oriented reports
 - AI Gateway adapters for OpenAI-compatible, Anthropic, Gemini, and a local mock provider
-- Persistent AI conversations and Markdown/HTML/PDF report export code
+- Local AI conversation storage and Markdown and HTML report export
 
 ## Known limitations
 
@@ -24,7 +25,7 @@ The current repository is prepared as a **release candidate under a license gate
 - Data Center import, archive, restore, delete, export, and report history remain partial
 - Provider-native streaming and full native Tool Calling are not complete
 - AI evidence click-to-seek Timeline integration is not complete
-- PDF export requires packaged Electron validation
+- PDF export is available in the interface and still requires packaged workflow validation
 - Real API credentials and robot hardware were not tested
 
 ## Windows security notice
@@ -33,7 +34,7 @@ Windows builds are unsigned by project policy. Windows Smart App Control or repu
 
 ## Installation
 
-The future beta assets will include an unsigned Windows x64 NSIS installer and portable archive, plus Linux x64 AppImage and deb packages. Each asset will have a SHA-256 entry in `SHA256SUMS.txt`.
+Once the GitHub pre-release is available, verify the file against `SHA256SUMS.txt` before installation. On Windows x64, run the unsigned NSIS installer or extract the portable ZIP and open `LabScope.exe`. On Linux x86-64, make the AppImage executable and run it as your desktop user, or install the amd64 DEB with `sudo apt install ./LabScope-0.1.0-beta.1-linux-amd64.deb`.
 
 ## ROS 2 setup
 

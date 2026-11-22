@@ -17,8 +17,9 @@ const scratch = f.mkdtempSync(p.join(tmpdir(), 'labscope-runtime-'));
 const normalize = (datas) => JSON.parse(JSON.stringify(datas));
 const expectedCalls = ['ai:chat', 'ai:provider-remove', 'ai:provider-test', 'ai:provider-upsert', 'ai:providers',
   'analysis:log', 'analysis:run', 'analysis:tools',
-  'app:info', 'config:get', 'config:set', 'recording:cancel', 'recording:event', 'recording:list',
-  'recording:pause', 'recording:resume', 'recording:start', 'recording:stop', 'report:generate', 'session:connect',
+  'app:info', 'config:get', 'config:set', 'conversation:append', 'conversation:create', 'conversation:delete',
+  'conversation:list', 'conversation:save', 'recording:cancel', 'recording:event', 'recording:list',
+  'recording:pause', 'recording:resume', 'recording:start', 'recording:stop', 'report:export-pdf', 'report:generate', 'session:connect',
   'session:disconnect', 'session:panel-topics', 'session:status', 'session:subscribe'];
 const outcomes = [];
 async function check(name, fn) {
@@ -183,6 +184,9 @@ async function main() {
       aiProviders: [], aiProviderUpsert: [{ name: 'test', kind: 'openai-compatible', baseUrl: 'https://example.invalid', model: 'test', apiKey: 'test', enabled: true }],
       aiProviderRemove: ['id'], aiProviderTest: ['id'], aiChat: ['id', 'prompt'],
       analysisTools: [], analysisRun: ['experiment'], analysisLog: ['INFO fixture', 'fixture.log'], reportGenerate: ['experiment', 'local-mock', 'summarize'],
+      conversationList: [], conversationCreate: [{ title: 'Fixture', experimentId: null, providerId: 'local-mock', modelId: 'deterministic-v1' }],
+      conversationSave: ['id', { title: 'Updated' }], conversationDelete: ['id'],
+      conversationAppend: ['id', { role: 'user', text: 'Summarize' }], reportExportPdf: ['<p>Fixture</p>', 'report.pdf'],
     })) await api[method](...args);
     assert.deepEqual(invokes.map((item) => item.channel).sort(), expectedCalls);
     for (const [method, name] of Object.entries({
@@ -196,7 +200,7 @@ async function main() {
       renderer.emit(name, {}, payload);
       assert.deepEqual(seen, [[payload]]);
     }
-    return 'Eight requests and three push events use exactly the intended channel names.';
+    return 'The preload requests and three push events use exactly the intended channel names.';
   });
   await check('IPC validation, default config, persistence, and corrupt JSON recovery', async () => {
     assert.equal(prod.ipc('config:get').lastUrl, 'ws://127.0.0.1:8765');

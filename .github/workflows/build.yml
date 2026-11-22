@@ -3,6 +3,7 @@ name: Build desktop packages
 on:
   push:
     branches: [main]
+    tags: ['v*']
   pull_request:
   workflow_dispatch:
 
@@ -61,6 +62,7 @@ jobs:
           fi
           sha256sum -- "${packages[@]}" > SHA256SUMS.txt
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
         with:
           name: ${{ matrix.artifact }}
           if-no-files-found: error
