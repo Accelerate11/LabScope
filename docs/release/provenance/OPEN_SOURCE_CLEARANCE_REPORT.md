@@ -1,5 +1,7 @@
 # Open Source Clearance Report
 
+This report documents the initial review. The [final license readiness check](FINAL_LICENSE_READINESS.md) records the follow-up evidence and current release status.
+
 ## Audit scope
 
 Project LabScope, local source at `D:/LabScope/source/labOS`, audited at commit `48fa2c4`. The audit inspected Git history, tracked files, source headers, workspace manifests, lockfile metadata, M0 captured schemas and payloads, existing license notes, and the old unsigned Windows development package.

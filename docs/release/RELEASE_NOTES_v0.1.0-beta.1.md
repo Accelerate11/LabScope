@@ -4,7 +4,7 @@
 
 LabScope is a local-first robotics experiment workstation for visualization, recording, playback, and AI-assisted experiment analysis.
 
-The public pre-release is pending source ownership, license approval, and third-party redistribution review.
+The public pre-release is pending closure of the binary redistribution requirements.
 
 ## Implemented capabilities
 
@@ -46,7 +46,7 @@ Configure a provider in AI Analysis. API keys remain local and use Electron `saf
 
 ## License status
 
-Apache-2.0 remains a candidate only. This beta is not published until [RELEASE_LICENSE_BLOCKERS.md](RELEASE_LICENSE_BLOCKERS.md) is resolved.
+The maintainer selected Apache-2.0 for original LabScope code. Third-party components retain their own licenses. The remaining binary distribution requirements are tracked in the [release license blockers](RELEASE_LICENSE_BLOCKERS.md).
 
 ## Feedback
 

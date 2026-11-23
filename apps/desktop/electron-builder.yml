@@ -10,6 +10,14 @@ files:
   - out/**/*
   - package.json
 
+extraResources:
+  - from: ../../LICENSE
+    to: licenses/LabScope-Apache-2.0.txt
+  - from: ../../THIRD_PARTY_NOTICES.md
+    to: licenses/THIRD_PARTY_NOTICES.md
+  - from: ../../third-party/licenses
+    to: licenses/third-party/licenses
+
 asar: true
 
 electronFuses:

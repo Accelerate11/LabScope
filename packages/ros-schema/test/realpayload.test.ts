@@ -47,8 +47,9 @@ describe('real captured Imu payload', () => {
     const q = value['orientation'] as { x: number; y: number; z: number; w: number };
     expect(q.x).toBe(0);
     expect(q.y).toBe(0);
-    expect(q.z).toBeCloseTo(-0.9829203910343837, 12);
-    expect(q.w).toBeCloseTo(0.1840312606293132, 12);
+    // The final M0 capture is also preserved in docs/m0/artifacts/samples/manifest.json.
+    expect(q.z).toBeCloseTo(0.9989416251549038, 12);
+    expect(q.w).toBeCloseTo(-0.045995973007205045, 12);
     expect(Math.hypot(q.x, q.y, q.z, q.w)).toBeCloseTo(1, 12);
 
     const av = value['angular_velocity'] as { x: number; y: number; z: number };

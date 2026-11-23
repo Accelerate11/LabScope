@@ -142,7 +142,7 @@ Read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a change. Security report
 
 ## License status
 
-LabScope's original-source license is still under maintainer review. Apache-2.0 is a candidate only. See [LICENSE_STATUS.md](LICENSE_STATUS.md) and [docs/third-party-licenses.md](docs/third-party-licenses.md). No formal `LICENSE` file is included until source ownership and third-party notices are confirmed.
+Original LabScope code is available under [Apache-2.0](LICENSE). Upstream components retain the terms listed in [Third-party notices](THIRD_PARTY_NOTICES.md). The [license readiness report](docs/release/provenance/FINAL_LICENSE_READINESS.md) tracks the remaining binary distribution requirements.
 
 ## Roadmap
 

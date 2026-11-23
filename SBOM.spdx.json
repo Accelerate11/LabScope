@@ -1,0 +1,1053 @@
+{
+  "spdxVersion": "SPDX-2.3",
+  "dataLicense": "CC0-1.0",
+  "SPDXID": "SPDXRef-DOCUMENT",
+  "name": "LabScope 0.1.0-beta.1 distribution audit at 287b3f0",
+  "documentNamespace": "https://github.com/Accelerate11/LabScope/sbom/0.1.0-beta.1/287b3f0/2026-11-23",
+  "creationInfo": {
+    "created": "2026-11-23T07:03:35Z",
+    "creators": [
+      "Tool: LabScope license audit"
+    ]
+  },
+  "comment": "Local candidates were built from 287b3f0. The notice kit is a follow-up on 9998c7a. Candidate archive checksums predate the added notices and do not authorize redistribution.",
+  "packages": [
+    {
+      "SPDXID": "SPDXRef-LabScope-Source",
+      "name": "LabScope original source",
+      "downloadLocation": "https://github.com/Accelerate11/LabScope/tree/main",
+      "filesAnalyzed": false,
+      "licenseDeclared": "Apache-2.0",
+      "licenseConcluded": "Apache-2.0",
+      "copyrightText": "NOASSERTION",
+      "versionInfo": "0.1.0-beta.1",
+      "comment": "On 2026-11-23 the maintainer approved publication of original LabScope source under Apache-2.0. Third-party material retains its own licensing."
+    },
+    {
+      "SPDXID": "SPDXRef-Windows-NSIS",
+      "name": "LabScope Windows-NSIS",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseDeclared": "NOASSERTION",
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "versionInfo": "0.1.0-beta.1",
+      "comment": "Inspected local candidate, not a public release.",
+      "packageFileName": "LabScope-0.1.0-beta.1-windows-x64-unsigned.exe",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "54309b4e8232e4665540c6e0d5807fc9491ffb71023f91364239e8f815d6e731"
+        }
+      ],
+      "description": "Observed file size: 121741165 bytes."
+    },
+    {
+      "SPDXID": "SPDXRef-Windows-ZIP",
+      "name": "LabScope Windows-ZIP",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseDeclared": "NOASSERTION",
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "versionInfo": "0.1.0-beta.1",
+      "comment": "Inspected local candidate, not a public release.",
+      "packageFileName": "LabScope-0.1.0-beta.1-windows-x64-portable.zip",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "003b0aba068adf50bb9bbfc7926d098a20ea2212a68527f5cebdff716b11bfc9"
+        }
+      ],
+      "description": "Observed file size: 163056058 bytes."
+    },
+    {
+      "SPDXID": "SPDXRef-Linux-AppImage",
+      "name": "LabScope Linux-AppImage",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseDeclared": "NOASSERTION",
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "versionInfo": "0.1.0-beta.1",
+      "comment": "Inspected local candidate, not a public release.",
+      "packageFileName": "LabScope-0.1.0-beta.1-linux-x86_64.AppImage",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "5337280699eefdd92ef69cc2ed88d7e525badc42e57e3f7499012338d56bd2e4"
+        }
+      ],
+      "description": "Observed file size: 126381026 bytes."
+    },
+    {
+      "SPDXID": "SPDXRef-Linux-DEB",
+      "name": "LabScope Linux-DEB",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseDeclared": "NOASSERTION",
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "versionInfo": "0.1.0-beta.1",
+      "comment": "Inspected local candidate, not a public release.",
+      "packageFileName": "LabScope-0.1.0-beta.1-linux-amd64.deb",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "393a82aad6f9e1a069f34243d565b6eb9206670b44ca5bf51ceebdeeab7970ee"
+        }
+      ],
+      "description": "Observed file size: 101587260 bytes."
+    },
+    {
+      "SPDXID": "SPDXRef-App-ASAR",
+      "name": "LabScope app.asar",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseDeclared": "NOASSERTION",
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "versionInfo": "0.1.0-beta.1",
+      "comment": "Application JavaScript and CSS. The inventory conservatively includes tslib from the bundled MCAP dependency closure."
+    },
+    {
+      "SPDXID": "SPDXRef-react",
+      "name": "react",
+      "downloadLocation": "https://registry.npmjs.org/react/-/react-19.3.1.tgz",
+      "filesAnalyzed": false,
+      "licenseDeclared": "MIT",
+      "licenseConcluded": "MIT",
+      "copyrightText": "NOASSERTION",
+      "versionInfo": "19.3.1",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/react@19.3.1"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-react-dom",
+      "name": "react-dom",
+      "downloadLocation": "https://registry.npmjs.org/react-dom/-/react-dom-19.3.1.tgz",
+      "filesAnalyzed": false,
+      "licenseDeclared": "MIT",
+      "licenseConcluded": "MIT",
+      "copyrightText": "NOASSERTION",
+      "versionInfo": "19.3.1",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/react-dom@19.3.1"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-scheduler",
+      "name": "scheduler",
+      "downloadLocation": "https://registry.npmjs.org/scheduler/-/scheduler-0.28.0.tgz",
+      "filesAnalyzed": false,
+      "licenseDeclared": "MIT",
+      "licenseConcluded": "MIT",
+      "copyrightText": "NOASSERTION",
+      "versionInfo": "0.28.0",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/scheduler@0.28.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-zustand",
+      "name": "zustand",
+      "downloadLocation": "https://registry.npmjs.org/zustand/-/zustand-5.1.0.tgz",
+      "filesAnalyzed": false,
+      "licenseDeclared": "MIT",
+      "licenseConcluded": "MIT",
+      "copyrightText": "NOASSERTION",
+      "versionInfo": "5.1.0",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/zustand@5.1.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-three",
+      "name": "three",
+      "downloadLocation": "https://registry.npmjs.org/three/-/three-0.187.0.tgz",
+      "filesAnalyzed": false,
+      "licenseDeclared": "MIT",
+      "licenseConcluded": "MIT",
+      "copyrightText": "NOASSERTION",
+      "versionInfo": "0.187.0",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/three@0.187.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-tailwindcss",
+      "name": "tailwindcss",
+      "downloadLocation": "https://registry.npmjs.org/tailwindcss/-/tailwindcss-4.3.5.tgz",
+      "filesAnalyzed": false,
+      "licenseDeclared": "MIT",
+      "licenseConcluded": "MIT",
+      "copyrightText": "NOASSERTION",
+      "versionInfo": "4.3.5",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/tailwindcss@4.3.5"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-mcap-core",
+      "name": "@mcap/core",
+      "downloadLocation": "https://registry.npmjs.org/@mcap/core/-/core-2.4.0.tgz",
+      "filesAnalyzed": false,
+      "licenseDeclared": "MIT",
+      "licenseConcluded": "MIT",
+      "copyrightText": "NOASSERTION",
+      "versionInfo": "2.4.0",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/%40mcap/core@2.4.0"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-foxglove-crc",
+      "name": "@foxglove/crc",
+      "downloadLocation": "https://registry.npmjs.org/@foxglove/crc/-/crc-0.0.3.tgz",
+      "filesAnalyzed": false,
+      "licenseDeclared": "MIT",
+      "licenseConcluded": "MIT",
+      "copyrightText": "NOASSERTION",
+      "versionInfo": "0.0.3",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/%40foxglove/crc@0.0.3"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-heap-js",
+      "name": "heap-js",
+      "downloadLocation": "https://registry.npmjs.org/heap-js/-/heap-js-2.7.1.tgz",
+      "filesAnalyzed": false,
+      "licenseDeclared": "BSD-3-Clause",
+      "licenseConcluded": "BSD-3-Clause",
+      "copyrightText": "NOASSERTION",
+      "versionInfo": "2.7.1",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/heap-js@2.7.1"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-tslib",
+      "name": "tslib",
+      "downloadLocation": "https://registry.npmjs.org/tslib/-/tslib-2.9.1.tgz",
+      "filesAnalyzed": false,
+      "licenseDeclared": "0BSD",
+      "licenseConcluded": "0BSD",
+      "copyrightText": "NOASSERTION",
+      "versionInfo": "2.9.1",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/tslib@2.9.1"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-fzstd",
+      "name": "fzstd",
+      "downloadLocation": "https://registry.npmjs.org/fzstd/-/fzstd-0.1.1.tgz",
+      "filesAnalyzed": false,
+      "licenseDeclared": "MIT",
+      "licenseConcluded": "MIT",
+      "copyrightText": "NOASSERTION",
+      "versionInfo": "0.1.1",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/fzstd@0.1.1"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-Electron",
+      "name": "Electron",
+      "downloadLocation": "https://github.com/electron/electron/releases/tag/v45.4.1",
+      "filesAnalyzed": false,
+      "licenseDeclared": "MIT",
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "versionInfo": "45.4.1",
+      "comment": "Electron original code is MIT. Aggregate terms are documented in Electron and Chromium license files."
+    },
+    {
+      "SPDXID": "SPDXRef-Chromium",
+      "name": "Chromium",
+      "downloadLocation": "https://chromium.googlesource.com/chromium/src/+/refs/tags/156.0.8078.100",
+      "filesAnalyzed": false,
+      "licenseDeclared": "BSD-3-Clause",
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "versionInfo": "156.0.8078.100",
+      "comment": "Chromium has an aggregate notice for independently licensed components."
+    },
+    {
+      "SPDXID": "SPDXRef-NodeJS",
+      "name": "Node.js",
+      "downloadLocation": "https://nodejs.org/dist/v24.22.3/",
+      "filesAnalyzed": false,
+      "licenseDeclared": "MIT",
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "versionInfo": "24.22.3",
+      "comment": "Embedded Node.js and its dependencies retain their license notices."
+    },
+    {
+      "SPDXID": "SPDXRef-SwiftShader",
+      "name": "SwiftShader",
+      "downloadLocation": "https://swiftshader.googlesource.com/SwiftShader",
+      "filesAnalyzed": false,
+      "licenseDeclared": "Apache-2.0",
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "comment": "See platform LICENSES.chromium.html for aggregate notice."
+    },
+    {
+      "SPDXID": "SPDXRef-Vulkan-Loader",
+      "name": "Vulkan Loader",
+      "downloadLocation": "https://github.com/KhronosGroup/Vulkan-Loader",
+      "filesAnalyzed": false,
+      "licenseDeclared": "Apache-2.0",
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "comment": "See platform LICENSES.chromium.html for aggregate notice."
+    },
+    {
+      "SPDXID": "SPDXRef-DXC",
+      "name": "DirectX Shader Compiler (Dawn build)",
+      "downloadLocation": "https://github.com/microsoft/DirectXShaderCompiler",
+      "filesAnalyzed": false,
+      "licenseDeclared": "NOASSERTION",
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "versionInfo": "1.9.2609.0",
+      "comment": "The notice shipped in LICENSES.chromium.html includes the LLVM Release License and third-party terms.",
+      "packageFileName": "dxcompiler.dll",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "fa1a0580c59a4e2303c1c290d7586cb8cc633023c31fefecec8e638cead58ab4"
+        }
+      ],
+      "description": "Observed file size: 25779712 bytes."
+    },
+    {
+      "SPDXID": "SPDXRef-Microsoft-D3DCompiler",
+      "name": "Microsoft d3dcompiler_47.dll",
+      "downloadLocation": "https://www.nuget.org/packages/Microsoft.Windows.SDK.CPP/10.0.28000.2270",
+      "filesAnalyzed": false,
+      "licenseDeclared": "NOASSERTION",
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "Copyright Microsoft Corporation. All rights reserved.",
+      "versionInfo": "10.0.28000.2270",
+      "comment": "Byte-identical to the Microsoft SDK x64 Redist DLL. Microsoft SDK redistribution terms remain conditional on downstream fulfillment.",
+      "packageFileName": "d3dcompiler_47.dll",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "f5c95e919b4ffa1ac71049cd45b9f986d2965e6888395ca2806337985334fa56"
+        }
+      ],
+      "description": "Observed file size: 4753864 bytes."
+    },
+    {
+      "SPDXID": "SPDXRef-FFmpeg-Windows",
+      "name": "Chromium FFmpeg FFmpeg-Windows",
+      "downloadLocation": "https://chromium.googlesource.com/chromium/third_party/ffmpeg/+/9db86ce5b5b454dfc96c435f9f0723012980c37f",
+      "filesAnalyzed": false,
+      "licenseDeclared": "LGPL-2.1-or-later",
+      "licenseConcluded": "LGPL-2.1-or-later",
+      "copyrightText": "NOASSERTION",
+      "versionInfo": "9db86ce5b5b454dfc96c435f9f0723012980c37f",
+      "comment": "Chromium fork plus ordered Electron v45.4.1 FFmpeg patches. Shared library; binary redistribution clearance remains pending.",
+      "packageFileName": "ffmpeg.dll",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "f77b7b9c729184323cf4b61f60ab71b77f5eb96cb1aa18cc1a583d10d65a8bc3"
+        }
+      ],
+      "description": "Observed file size: 3097600 bytes."
+    },
+    {
+      "SPDXID": "SPDXRef-FFmpeg-Linux",
+      "name": "Chromium FFmpeg FFmpeg-Linux",
+      "downloadLocation": "https://chromium.googlesource.com/chromium/third_party/ffmpeg/+/9db86ce5b5b454dfc96c435f9f0723012980c37f",
+      "filesAnalyzed": false,
+      "licenseDeclared": "LGPL-2.1-or-later",
+      "licenseConcluded": "LGPL-2.1-or-later",
+      "copyrightText": "NOASSERTION",
+      "versionInfo": "9db86ce5b5b454dfc96c435f9f0723012980c37f",
+      "comment": "Chromium fork plus ordered Electron v45.4.1 FFmpeg patches. Shared library; binary redistribution clearance remains pending.",
+      "packageFileName": "libffmpeg.so",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "b640314ca3d702b7a3c0392020a0998449b8043a638b3bccc75eb96521d2b363"
+        }
+      ],
+      "description": "Observed file size: 2794208 bytes."
+    },
+    {
+      "SPDXID": "SPDXRef-NSIS",
+      "name": "NSIS stubs and standard plug-ins",
+      "downloadLocation": "https://github.com/electron-userland/electron-builder-binaries/releases/tag/nsis-3.0.4.1",
+      "filesAnalyzed": false,
+      "licenseDeclared": "Zlib",
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "versionInfo": "3.0.4.1",
+      "comment": "System.dll, nsDialogs.dll, nsExec.dll and wizard bitmap. NSIS COPYING describes multiple licenses for compression code."
+    },
+    {
+      "SPDXID": "SPDXRef-UAC",
+      "name": "UAC.dll",
+      "downloadLocation": "https://nsis.sourceforge.io/UAC_plug-in",
+      "filesAnalyzed": false,
+      "licenseDeclared": "Zlib",
+      "licenseConcluded": "Zlib",
+      "copyrightText": "NOASSERTION",
+      "comment": "Exact x86 Unicode DLL matches the author archive and its Zlib license.",
+      "packageFileName": "UAC.dll",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "2f7f8fc05dc4fd0d5cda501b47e4433357e887bbfed7292c028d99c73b52dc08"
+        }
+      ],
+      "description": "Observed file size: 14848 bytes.",
+      "versionInfo": "0.2.4c"
+    },
+    {
+      "SPDXID": "SPDXRef-StdUtils",
+      "name": "StdUtils.dll",
+      "downloadLocation": "https://nsis.sourceforge.io/StdUtils_plug-in",
+      "filesAnalyzed": false,
+      "licenseDeclared": "LGPL-2.1-or-later",
+      "licenseConcluded": "LGPL-2.1-or-later",
+      "copyrightText": "NOASSERTION",
+      "versionInfo": "1.14",
+      "comment": "Exact x86 Unicode DLL matches upstream 1.14. See the upstream installer clarification and corresponding-source delivery requirement.",
+      "packageFileName": "StdUtils.dll",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "b72e9013a6204e9f01076dc38dabbf30870d44dfc66962adbf73619d4331601e"
+        }
+      ],
+      "description": "Observed file size: 102400 bytes."
+    },
+    {
+      "SPDXID": "SPDXRef-Nsis7z",
+      "name": "nsis7z.dll",
+      "downloadLocation": "https://nsis.sourceforge.io/Nsis7z_plug-in",
+      "filesAnalyzed": false,
+      "licenseDeclared": "NOASSERTION",
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "versionInfo": "19.00",
+      "comment": "Exact x86 Unicode DLL matches upstream 19.00 archive. See its LZMA SDK notice, 7-Zip license, and exact linked license review.",
+      "packageFileName": "nsis7z.dll",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "b393f05e8ff919ef071181050e1873c9a776e1a0ae8329aefff7007d0cadf592"
+        }
+      ],
+      "description": "Observed file size: 434176 bytes."
+    },
+    {
+      "SPDXID": "SPDXRef-WinShell",
+      "name": "WinShell.dll",
+      "downloadLocation": "https://nsis.sourceforge.io/WinShell_plug-in",
+      "filesAnalyzed": false,
+      "licenseDeclared": "NOASSERTION",
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "comment": "Exact x86 Unicode DLL matches upstream 20121005 archive. Freeware is stated but a downstream redistribution grant remains unverified.",
+      "packageFileName": "WinShell.dll",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "9be85b986ea66a6997dde658abe82b3147ed2a1a3dcb784bb5176f41d22815a6"
+        }
+      ],
+      "description": "Observed file size: 3072 bytes.",
+      "versionInfo": "20121005"
+    },
+    {
+      "SPDXID": "SPDXRef-AppImage-Runtime",
+      "name": "Legacy AppImage runtime and AppRun",
+      "downloadLocation": "https://github.com/electron-userland/electron-builder-binaries/releases/tag/appimage-12.0.1",
+      "filesAnalyzed": false,
+      "licenseDeclared": "NOASSERTION",
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "versionInfo": "toolset 12.0.1",
+      "comment": "The first 188,392 bytes match runtime-x64; it identifies AppImageKit effcebc. AppRun comes from electron-builder. The runtime static dependency obligations and actual published source delivery remain open.",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "24da8e0e149b7211cbfb00a545189a1101cb18d1f27d4cfc1895837d2c30bc30"
+        }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-libXss.so.1",
+      "name": "libXss.so.1",
+      "downloadLocation": "https://archive.ubuntu.com/ubuntu/pool/main/libx/libxss/libxss1_1.2.2-1_amd64.deb",
+      "filesAnalyzed": false,
+      "licenseDeclared": "NOASSERTION",
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "comment": "Byte-for-byte match with Ubuntu package. See the exact package copyright notice. ELF Build ID 82c0e3569eb993bf2c2e2bb8379b1564fe28eebf.",
+      "packageFileName": "libXss.so.1",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "270fe6e4d430118793d01cac5c6081d0ea9e244cfcf510475bc779bef21b754a"
+        }
+      ],
+      "description": "Observed file size: 14488 bytes.",
+      "versionInfo": "1:1.2.2-1"
+    },
+    {
+      "SPDXID": "SPDXRef-libXtst.so.6",
+      "name": "libXtst.so.6",
+      "downloadLocation": "https://archive.ubuntu.com/ubuntu/pool/main/libx/libxtst/libxtst6_1.2.2-1_amd64.deb",
+      "filesAnalyzed": false,
+      "licenseDeclared": "NOASSERTION",
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "comment": "Byte-for-byte match with Ubuntu package. See the exact package copyright notice. ELF Build ID 0403493a3501094414e75b977548928a413d8146.",
+      "packageFileName": "libXtst.so.6",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "38f9ccb12d2c477aad85db6279afc334d9f250f613884c188ace7232b83e9b68"
+        }
+      ],
+      "description": "Observed file size: 22880 bytes.",
+      "versionInfo": "2:1.2.2-1"
+    },
+    {
+      "SPDXID": "SPDXRef-libappindicator.so.1",
+      "name": "libappindicator.so.1",
+      "downloadLocation": "https://archive.ubuntu.com/ubuntu/pool/main/liba/libappindicator/libappindicator1_12.10.1+13.10.20130920-0ubuntu4_amd64.deb",
+      "filesAnalyzed": false,
+      "licenseDeclared": "GPL-3.0-only AND LGPL-2.1-only",
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "comment": "Byte-for-byte match with Ubuntu package. See the exact package copyright notice. ELF Build ID 3952e6e8393caf73029e13d642c28e822ee50521.",
+      "packageFileName": "libappindicator.so.1",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "033b8803f20b98e8cd56fc8e75e3a71a552f75c0cff9bd0937f3ddd6ee5d2145"
+        }
+      ],
+      "description": "Observed file size: 52128 bytes.",
+      "versionInfo": "12.10.1+13.10.20130920-0ubuntu4"
+    },
+    {
+      "SPDXID": "SPDXRef-libgconf-2.so.4",
+      "name": "libgconf-2.so.4",
+      "downloadLocation": "https://archive.ubuntu.com/ubuntu/pool/main/g/gconf/libgconf-2-4_3.2.6-0ubuntu2_amd64.deb",
+      "filesAnalyzed": false,
+      "licenseDeclared": "LGPL-2.0-or-later",
+      "licenseConcluded": "LGPL-2.0-or-later",
+      "copyrightText": "NOASSERTION",
+      "comment": "Byte-for-byte match with Ubuntu package. See the exact package copyright notice. ELF Build ID ac0a2bc11dc7505e276c0327b1c1897a997ba02c.",
+      "packageFileName": "libgconf-2.so.4",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "ba977334112bb81f6457ee4aad833c6d5f1ff731c718073cd50777d613b23185"
+        }
+      ],
+      "description": "Observed file size: 192296 bytes.",
+      "versionInfo": "3.2.6-0ubuntu2"
+    },
+    {
+      "SPDXID": "SPDXRef-libindicator.so.7",
+      "name": "libindicator.so.7",
+      "downloadLocation": "https://archive.ubuntu.com/ubuntu/pool/main/libi/libindicator/libindicator7_12.10.2+14.04.20140402-0ubuntu1_amd64.deb",
+      "filesAnalyzed": false,
+      "licenseDeclared": "GPL-3.0-only",
+      "licenseConcluded": "GPL-3.0-only",
+      "copyrightText": "NOASSERTION",
+      "comment": "Byte-for-byte match with Ubuntu package. See the exact package copyright notice. ELF Build ID 089a982c5c6194888bb10d378a2f29f719bcddef.",
+      "packageFileName": "libindicator.so.7",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "3b61ae3424c4800975c1806245a2d286f6e1fc49cd9350913075c27a95f3c7a0"
+        }
+      ],
+      "description": "Observed file size: 60648 bytes.",
+      "versionInfo": "12.10.2+14.04.20140402-0ubuntu1"
+    },
+    {
+      "SPDXID": "SPDXRef-libnotify.so.4",
+      "name": "libnotify.so.4",
+      "downloadLocation": "https://archive.ubuntu.com/ubuntu/pool/main/libn/libnotify/libnotify4_0.7.6-1ubuntu3_amd64.deb",
+      "filesAnalyzed": false,
+      "licenseDeclared": "LGPL-2.1-or-later",
+      "licenseConcluded": "LGPL-2.1-or-later",
+      "copyrightText": "NOASSERTION",
+      "comment": "Byte-for-byte match with Ubuntu package. See the exact package copyright notice. ELF Build ID bc29207f80a6b64aec329dd8397df57672ee132e.",
+      "packageFileName": "libnotify.so.4",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "8f42294247a886c5a94b2a0ce1c0b65e953616d7efe8da664b3826cdeae47948"
+        }
+      ],
+      "description": "Observed file size: 31304 bytes.",
+      "versionInfo": "0.7.6-1ubuntu3"
+    },
+    {
+      "SPDXID": "SPDXRef-common-interfaces-fixture",
+      "name": "common_interfaces ROS message definitions",
+      "downloadLocation": "https://github.com/ros2/common_interfaces/tree/4.9.1",
+      "filesAnalyzed": false,
+      "licenseDeclared": "Apache-2.0",
+      "licenseConcluded": "Apache-2.0",
+      "copyrightText": "NOASSERTION",
+      "versionInfo": "4.9.1",
+      "comment": "Source-tree captured .msg definitions. geometry2 entry covers the tf2_msgs/TFMessage block only."
+    },
+    {
+      "SPDXID": "SPDXRef-rcl-interfaces-fixture",
+      "name": "rcl_interfaces ROS message definitions",
+      "downloadLocation": "https://github.com/ros2/rcl_interfaces/tree/1.2.2",
+      "filesAnalyzed": false,
+      "licenseDeclared": "Apache-2.0",
+      "licenseConcluded": "Apache-2.0",
+      "copyrightText": "NOASSERTION",
+      "versionInfo": "1.2.2",
+      "comment": "Source-tree captured .msg definitions. geometry2 entry covers the tf2_msgs/TFMessage block only."
+    },
+    {
+      "SPDXID": "SPDXRef-geometry2-fixture",
+      "name": "geometry2 ROS message definitions",
+      "downloadLocation": "https://github.com/ros2/geometry2/tree/0.25.20",
+      "filesAnalyzed": false,
+      "licenseDeclared": "BSD-3-Clause",
+      "licenseConcluded": "BSD-3-Clause",
+      "copyrightText": "NOASSERTION",
+      "versionInfo": "0.25.20",
+      "comment": "Source-tree captured .msg definitions. geometry2 entry covers the tf2_msgs/TFMessage block only."
+    },
+    {
+      "SPDXID": "SPDXRef-Foxglove-Schema",
+      "name": "Foxglove SDK SystemInfo JSON Schema",
+      "downloadLocation": "https://github.com/foxglove/foxglove-sdk/blob/ros-v3.6.3/rust/foxglove/src/system_info.rs",
+      "filesAnalyzed": false,
+      "licenseDeclared": "MIT",
+      "licenseConcluded": "MIT",
+      "copyrightText": "Copyright (c) Foxglove Technologies Inc",
+      "versionInfo": "0.30.2",
+      "comment": "Captured source-tree schema. The bridge and SDK binary are not bundled."
+    },
+    {
+      "SPDXID": "SPDXRef-AppImageKit",
+      "name": "AppImageKit",
+      "versionInfo": "effcebc",
+      "downloadLocation": "https://github.com/AppImage/AppImageKit/tree/effcebc",
+      "filesAnalyzed": false,
+      "licenseDeclared": "MIT",
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "comment": "Exact self-reported runtime revision."
+    },
+    {
+      "SPDXID": "SPDXRef-libappimage",
+      "name": "libappimage",
+      "versionInfo": "13f401a4a384ec59ec9a144e2a7006adf751571f",
+      "downloadLocation": "https://github.com/AppImage/libappimage/tree/13f401a4a384ec59ec9a144e2a7006adf751571f",
+      "filesAnalyzed": false,
+      "licenseDeclared": "MIT",
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "comment": "Exact AppImageKit Git submodule pin."
+    },
+    {
+      "SPDXID": "SPDXRef-squashfuse",
+      "name": "squashfuse",
+      "versionInfo": "1f98030",
+      "downloadLocation": "https://github.com/vasi/squashfuse/tree/1f98030",
+      "filesAnalyzed": false,
+      "licenseDeclared": "BSD-2-Clause",
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "comment": "Default static build pin with libappimage patches; runtime reports squashfuse 0.1.100."
+    },
+    {
+      "SPDXID": "SPDXRef-xz",
+      "name": "XZ Utils / liblzma",
+      "versionInfo": "5.2.3",
+      "downloadLocation": "https://sourceforge.net/projects/lzmautils/files/xz-5.2.3.tar.gz/download",
+      "filesAnalyzed": false,
+      "licenseDeclared": "NOASSERTION",
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "comment": "Default XZ static build pin; aggregate source and individual files have different terms."
+    }
+  ],
+  "relationships": [
+    {
+      "spdxElementId": "SPDXRef-DOCUMENT",
+      "relationshipType": "DESCRIBES",
+      "relatedSpdxElement": "SPDXRef-LabScope-Source"
+    },
+    {
+      "spdxElementId": "SPDXRef-DOCUMENT",
+      "relationshipType": "DESCRIBES",
+      "relatedSpdxElement": "SPDXRef-Windows-NSIS"
+    },
+    {
+      "spdxElementId": "SPDXRef-DOCUMENT",
+      "relationshipType": "DESCRIBES",
+      "relatedSpdxElement": "SPDXRef-Windows-ZIP"
+    },
+    {
+      "spdxElementId": "SPDXRef-DOCUMENT",
+      "relationshipType": "DESCRIBES",
+      "relatedSpdxElement": "SPDXRef-Linux-AppImage"
+    },
+    {
+      "spdxElementId": "SPDXRef-DOCUMENT",
+      "relationshipType": "DESCRIBES",
+      "relatedSpdxElement": "SPDXRef-Linux-DEB"
+    },
+    {
+      "spdxElementId": "SPDXRef-App-ASAR",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-react"
+    },
+    {
+      "spdxElementId": "SPDXRef-App-ASAR",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-react-dom"
+    },
+    {
+      "spdxElementId": "SPDXRef-App-ASAR",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-scheduler"
+    },
+    {
+      "spdxElementId": "SPDXRef-App-ASAR",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-zustand"
+    },
+    {
+      "spdxElementId": "SPDXRef-App-ASAR",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-three"
+    },
+    {
+      "spdxElementId": "SPDXRef-App-ASAR",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-tailwindcss"
+    },
+    {
+      "spdxElementId": "SPDXRef-App-ASAR",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-mcap-core"
+    },
+    {
+      "spdxElementId": "SPDXRef-App-ASAR",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-foxglove-crc"
+    },
+    {
+      "spdxElementId": "SPDXRef-App-ASAR",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-heap-js"
+    },
+    {
+      "spdxElementId": "SPDXRef-App-ASAR",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-tslib"
+    },
+    {
+      "spdxElementId": "SPDXRef-App-ASAR",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-fzstd"
+    },
+    {
+      "spdxElementId": "SPDXRef-Windows-NSIS",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-App-ASAR"
+    },
+    {
+      "spdxElementId": "SPDXRef-Windows-NSIS",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-Electron"
+    },
+    {
+      "spdxElementId": "SPDXRef-Windows-NSIS",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-SwiftShader"
+    },
+    {
+      "spdxElementId": "SPDXRef-Windows-NSIS",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-Vulkan-Loader"
+    },
+    {
+      "spdxElementId": "SPDXRef-Windows-NSIS",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-FFmpeg-Windows"
+    },
+    {
+      "spdxElementId": "SPDXRef-Windows-NSIS",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-DXC"
+    },
+    {
+      "spdxElementId": "SPDXRef-Windows-NSIS",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-Microsoft-D3DCompiler"
+    },
+    {
+      "spdxElementId": "SPDXRef-Windows-ZIP",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-App-ASAR"
+    },
+    {
+      "spdxElementId": "SPDXRef-Windows-ZIP",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-Electron"
+    },
+    {
+      "spdxElementId": "SPDXRef-Windows-ZIP",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-SwiftShader"
+    },
+    {
+      "spdxElementId": "SPDXRef-Windows-ZIP",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-Vulkan-Loader"
+    },
+    {
+      "spdxElementId": "SPDXRef-Windows-ZIP",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-FFmpeg-Windows"
+    },
+    {
+      "spdxElementId": "SPDXRef-Windows-ZIP",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-DXC"
+    },
+    {
+      "spdxElementId": "SPDXRef-Windows-ZIP",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-Microsoft-D3DCompiler"
+    },
+    {
+      "spdxElementId": "SPDXRef-Linux-AppImage",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-App-ASAR"
+    },
+    {
+      "spdxElementId": "SPDXRef-Linux-AppImage",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-Electron"
+    },
+    {
+      "spdxElementId": "SPDXRef-Linux-AppImage",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-SwiftShader"
+    },
+    {
+      "spdxElementId": "SPDXRef-Linux-AppImage",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-Vulkan-Loader"
+    },
+    {
+      "spdxElementId": "SPDXRef-Linux-AppImage",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-FFmpeg-Linux"
+    },
+    {
+      "spdxElementId": "SPDXRef-Linux-DEB",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-App-ASAR"
+    },
+    {
+      "spdxElementId": "SPDXRef-Linux-DEB",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-Electron"
+    },
+    {
+      "spdxElementId": "SPDXRef-Linux-DEB",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-SwiftShader"
+    },
+    {
+      "spdxElementId": "SPDXRef-Linux-DEB",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-Vulkan-Loader"
+    },
+    {
+      "spdxElementId": "SPDXRef-Linux-DEB",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-FFmpeg-Linux"
+    },
+    {
+      "spdxElementId": "SPDXRef-Electron",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-Chromium"
+    },
+    {
+      "spdxElementId": "SPDXRef-Electron",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-NodeJS"
+    },
+    {
+      "spdxElementId": "SPDXRef-Windows-NSIS",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-NSIS"
+    },
+    {
+      "spdxElementId": "SPDXRef-Windows-NSIS",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-UAC"
+    },
+    {
+      "spdxElementId": "SPDXRef-Windows-NSIS",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-StdUtils"
+    },
+    {
+      "spdxElementId": "SPDXRef-Windows-NSIS",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-Nsis7z"
+    },
+    {
+      "spdxElementId": "SPDXRef-Windows-NSIS",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-WinShell"
+    },
+    {
+      "spdxElementId": "SPDXRef-Linux-AppImage",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-AppImage-Runtime"
+    },
+    {
+      "spdxElementId": "SPDXRef-Linux-AppImage",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-libXss.so.1"
+    },
+    {
+      "spdxElementId": "SPDXRef-Linux-AppImage",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-libXtst.so.6"
+    },
+    {
+      "spdxElementId": "SPDXRef-Linux-AppImage",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-libappindicator.so.1"
+    },
+    {
+      "spdxElementId": "SPDXRef-Linux-AppImage",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-libgconf-2.so.4"
+    },
+    {
+      "spdxElementId": "SPDXRef-Linux-AppImage",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-libindicator.so.7"
+    },
+    {
+      "spdxElementId": "SPDXRef-Linux-AppImage",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-libnotify.so.4"
+    },
+    {
+      "spdxElementId": "SPDXRef-LabScope-Source",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-common-interfaces-fixture"
+    },
+    {
+      "spdxElementId": "SPDXRef-LabScope-Source",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-rcl-interfaces-fixture"
+    },
+    {
+      "spdxElementId": "SPDXRef-LabScope-Source",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-geometry2-fixture"
+    },
+    {
+      "spdxElementId": "SPDXRef-LabScope-Source",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-Foxglove-Schema"
+    },
+    {
+      "spdxElementId": "SPDXRef-AppImage-Runtime",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-AppImageKit"
+    },
+    {
+      "spdxElementId": "SPDXRef-AppImage-Runtime",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-libappimage"
+    },
+    {
+      "spdxElementId": "SPDXRef-AppImage-Runtime",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-squashfuse"
+    },
+    {
+      "spdxElementId": "SPDXRef-AppImage-Runtime",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-xz"
+    },
+    {
+      "spdxElementId": "SPDXRef-libappindicator.so.1",
+      "relationshipType": "DYNAMIC_LINK",
+      "relatedSpdxElement": "SPDXRef-libindicator.so.7"
+    }
+  ]
+}
