@@ -1,5 +1,7 @@
 # Final license readiness
 
+The subsequent public Beta shipped the Windows portable ZIP and Linux DEB after replacing FFmpeg with the official non-proprietary-codec variant and dropping the SDK D3D compiler from Windows. See the [published package report](../PUBLIC_BETA_RELEASE_REPORT.md) for the final assets and the deferred NSIS and AppImage conditions. This audit records the earlier candidate state.
+
 2026-11-23 · Provenance audit baseline `287b3f0` · Follow-up on `9998c7a`.
 
 | Gate | Status | Evidence |

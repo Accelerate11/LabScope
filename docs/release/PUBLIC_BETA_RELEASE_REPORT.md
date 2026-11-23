@@ -1,51 +1,36 @@
-# LabScope v0.1.0-beta.1 release execution
+# LabScope v0.1.0-beta.1 public beta release report
 
-2026-11-22, Asia/Shanghai. Public pre-release status is **blocked by the license gate**.
+Published as a GitHub pre-release on 2026-11-23.
 
-| Field | Result |
-| --- | --- |
-| Repository and branch | [Accelerate11/LabScope](https://github.com/Accelerate11/LabScope) · `main` |
-| Version | `0.1.0-beta.1` in the root manifest, desktop manifest, and both inspected app.asar archives |
-| Candidate source commit | `287b3f0a971b9db23c07638d9c0332fca58eef32`, including M3.0 and M3.0-R1 |
-| Local verification changes | Runtime test coverage for the six R1 IPC channels and release documentation. Both package builds used the application code at the candidate commit |
-| Remote main before source synchronization | `2d259b281b2a09ebcb62caa5b70b4af52e3a123e`, an ancestor of the candidate |
-| Tag | `v0.1.0-beta.1` absent locally and on GitHub at the preflight check |
-| Release URL | Pending. The GitHub Release lookup for the target tag returned 404 |
-| GitHub Actions | The source push triggers Windows and Linux builds and tests. Artifact upload runs only on version tag pushes |
+- Version `0.1.0-beta.1` and tag `v0.1.0-beta.1`
+- Source commit [`2b387e0`](https://github.com/Accelerate11/LabScope/commit/2b387e0671368576818ffacc2f2eeb022f750677)
+- [GitHub Pre-release](https://github.com/Accelerate11/LabScope/releases/tag/v0.1.0-beta.1)
+- [Official GitHub Actions tag build and acceptance run](https://github.com/Accelerate11/LabScope/actions/runs/45157899285)
 
-## Local verification
+## Downloads and checksums
 
-| Check | Result |
-| --- | --- |
-| Freezing the dependency graph | `pnpm install --frozen-lockfile` passed on Windows and with `--ignore-scripts --prefer-offline` on Ubuntu 22.04 under WSL2 |
-| Tests, types, and workspace builds | 122/122 unit tests, 8/8 runtime checks, typecheck, and build passed on both hosts after updating the IPC test allowlist |
-| Electron inputs | Electron 45.4.1 Windows and Linux ZIPs in local caches matched the official SHA-256 digests. electron-builder 26.18.0 generated fresh packages. [Official Electron release](https://github.com/electron/electron/releases/tag/v45.4.1) |
-| Windows NSIS | Silent per-user installation, installed EXE hash match, installed Simulation smoke, and uninstall passed |
-| Windows unpacked build | Simulation, Electron Renderer and preload, loopback Worker, workspace save/restore, and indexed MCAP playback passed |
-| Windows portable ZIP | All 74 entries verified byte for byte against the tested unpacked build |
-| Windows security | NSIS and the unpacked application returned `NotSigned`. The configured ASAR integrity, ASAR-only loading, and Node environment/inspector restrictions were verified on the packaged executable. Windows Smart App Control registry state was read as `0` for the approved test host |
-| Linux AppImage | x86-64 ELF and Simulation smoke passed on WSLg with AppImage extract-and-run |
-| Linux DEB | Package `labscope`, Debian version `0.1.0~beta.1`, architecture `amd64`. Indexed MCAP playback passed from DEB contents extracted to a temporary directory. System installation and AppImage FUSE launch remain untested |
-| Windows user data | NSIS sets `deleteAppDataOnUninstall: false`. The installation smoke used temporary profiles |
-| AI workflow | Registry and provider entry points covered by runtime tests. Packaged PDF output and live model credentials remain unverified |
-
-Build and smoke logs are in `D:/LabScope/logs/tests`, using the `beta-1-` prefix.
-
-## Local assets
-
-Files are staged under `D:/LabScope/builds/development/v0.1.0-beta.1-287b3f0/assets`. SHA-256 was calculated with PowerShell and all entries in `SHA256SUMS.txt` passed Linux `sha256sum -c`.
-
-| File | Bytes | SHA-256 |
+| Asset | Bytes | SHA-256 |
 | --- | ---: | --- |
-| LabScope-0.1.0-beta.1-windows-x64-unsigned.exe | 121741165 | `54309b4e8232e4665540c6e0d5807fc9491ffb71023f91364239e8f815d6e731` |
-| LabScope-0.1.0-beta.1-windows-x64-portable.zip | 163056058 | `003b0aba068adf50bb9bbfc7926d098a20ea2212a68527f5cebdff716b11bfc9` |
-| LabScope-0.1.0-beta.1-linux-x86_64.AppImage | 126381026 | `5337280699eefdd92ef69cc2ed88d7e525badc42e57e3f7499012338d56bd2e4` |
-| LabScope-0.1.0-beta.1-linux-amd64.deb | 101587260 | `393a82aad6f9e1a069f34243d565b6eb9206670b44ca5bf51ceebdeeab7970ee` |
+| [LabScope-0.1.0-beta.1-ffmpeg-source.tar.gz](https://github.com/Accelerate11/LabScope/releases/download/v0.1.0-beta.1/LabScope-0.1.0-beta.1-ffmpeg-source.tar.gz) | 39,723,394 | `231afaad1d6833eac184c1ec9df0ce1b8a05132fe2ee411e8356612f3d6151f2` |
+| [LabScope-0.1.0-beta.1-linux-amd64.deb](https://github.com/Accelerate11/LabScope/releases/download/v0.1.0-beta.1/LabScope-0.1.0-beta.1-linux-amd64.deb) | 101,829,896 | `cefc569c5708c7ed17908b7da7ce6cebd1d700e8e71e90da2fe381bc51df68f9` |
+| [LabScope-0.1.0-beta.1-windows-x64-portable.zip](https://github.com/Accelerate11/LabScope/releases/download/v0.1.0-beta.1/LabScope-0.1.0-beta.1-windows-x64-portable.zip) | 151,356,163 | `390f750409a77c9b3382569e05d295d69a8391a7eb2080a47cde0dab80917989` |
+| [SBOM.spdx.json](https://github.com/Accelerate11/LabScope/releases/download/v0.1.0-beta.1/SBOM.spdx.json) | 194,229 | `2040b8088e5fa6405b095d823fe5284e39cf83d7e87f1013415065f3ee4e87b2` |
+| [SHA256SUMS.txt](https://github.com/Accelerate11/LabScope/releases/download/v0.1.0-beta.1/SHA256SUMS.txt) | 496 | `a1e68152cee91963dbd4579eaf27dc2b08857da60eba64429274300fb3bde901` |
+| [THIRD_PARTY_NOTICES.md](https://github.com/Accelerate11/LabScope/releases/download/v0.1.0-beta.1/THIRD_PARTY_NOTICES.md) | 6,823 | `4e3830dfc26569e0a8e35ba2311ed0683294410e1fa992cadba0b455aec21a08` |
 
-For local acceptance, use the four files above and verify the manifest before installation. Public download links are pending the GitHub pre-release. The [release notes](RELEASE_NOTES_v0.1.0-beta.1.md) cover the installation steps, MCAP limits, incomplete Data Center and AI workflows, and hardware validation scope.
+The installed payloads contain 117 Windows and 126 Linux regular files. The SPDX 2.3 inventory was generated from those exact archives and validated against the official schema. The release asset digests match the local SHA-256 calculations and the binary hashes from the tag jobs.
 
-## License gate and publication
+## Build and acceptance
 
-`FINAL_LICENSE_READINESS.md` was absent at preflight. The clearance audit leaves LabScope ownership, rights for ROS and Foxglove fixtures, and final licensing unresolved. The new package contents add evidence for the binary review. The final NOTICE bundle and redistribution checks, including FFmpeg and the AppImage system libraries, remain outstanding. [License blockers](RELEASE_LICENSE_BLOCKERS.md) · [Clearance audit](provenance/OPEN_SOURCE_CLEARANCE_REPORT.md)
+- Official Windows 2025 and Ubuntu 24.04 x64 runners used Node.js 24.16.0, pnpm 11.28.5 with a frozen lockfile, Electron 45.4.1, and Electron Builder 26.18.0. The builds, type checks, 122 unit tests, and eight runtime checks passed.
+- The Windows job started LabScope from the extracted portable ZIP. The local Windows 11 candidate also rendered with Three.js and WebGL2 on the NVIDIA RTX 4060 through ANGLE Direct3D11 after dropping the SDK D3D DLL. The simulation, ROS connection interface, workspace with Camera Viewer and Plot, indexed MCAP recording and playback, and AI Workspace with Local Mock passed. Removing the portable folder removes the application files. Experiment data lives outside that folder.
+- The Linux job installed the final DEB and verified the Electron main process, renderer, WebGL2 with the SwiftShader OpenGL ES driver, ROS loopback, simulation, indexed MCAP recording and playback, and AI Workspace with Local Mock. The Windows application also passed the simulated full 3D scene test on hardware.
+- Both platforms started and ran the synthetic simulation after swapping in a compatible official FFmpeg library in isolated copies. The released binaries retain the pinned alternate FFmpeg library with proprietary codecs disabled. The configured Electron Fuses were verified in both final payloads.
 
-The maintainer authorized synchronization of the source and release documentation to `main`. The Beta tag, pre-release, and asset upload remain pending license clearance. Run the release workflow against the exact commit selected for the tag after clearance.
+## License and limits
+
+LabScope original source is Apache-2.0. The releases carry the third-party notices and separate LGPL FFmpeg library. The source archive contains the exact Electron and Chromium FFmpeg inputs and the ordered patch series. [Source and replacement instructions](FFMPEG_SOURCE.md)
+
+Windows executables are unsigned. Smart App Control or reputation-based protection may block them. Windows security settings were not changed. NSIS is deferred pending WinShell redistribution clearance. AppImage is deferred pending review of the legacy runtime and GPL-linked indicator libraries.
+
+MCAP LZ4 and unindexed playback, automatic recovery, Data Center completion, and provider-native tool calling remain limited. The acceptance run used simulation and a local AI provider. [Release notes](RELEASE_NOTES_v0.1.0-beta.1.md)

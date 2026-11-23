@@ -2,7 +2,7 @@
 
 LabScope is a local-first robotics experiment workstation for visualization, recording, playback, and AI-assisted analysis of ROS 2 data.
 
-The desktop version is **0.1.0-beta.1**. The public Beta targets an unsigned Windows x64 portable ZIP and a Linux amd64 DEB. [GitHub Releases](https://github.com/Accelerate11/LabScope/releases) · [Beta release notes](docs/release/RELEASE_NOTES_v0.1.0-beta.1.md)
+**LabScope 0.1.0-beta.1** is available as an unsigned Windows x64 portable ZIP and a Linux amd64 DEB. [Download the public Beta](https://github.com/Accelerate11/LabScope/releases/tag/v0.1.0-beta.1) · [Beta release report](docs/release/PUBLIC_BETA_RELEASE_REPORT.md)
 
 ## Core features
 
