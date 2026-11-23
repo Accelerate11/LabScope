@@ -62,7 +62,10 @@ jobs:
             "-c.linux.maintainer=$PACKAGE_MAINTAINER"
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends xvfb xauth ./apps/desktop/release/LabScope-0.1.0-beta.1-linux-amd64.deb
-          exe=/opt/LabScope/labscope
+          # Xvfb has no supported GPU. Exercise Chromium's OpenGL ES driver in software.
+          exe="$RUNNER_TEMP/labscope-software-gl"
+          printf '%s\n' '#!/bin/sh' 'exec /opt/LabScope/labscope --use-gl=angle --use-angle=swiftshader "$@"' > "$exe"
+          chmod +x "$exe"
           fixture="$RUNNER_TEMP/linux-simulation.mcap"
           pnpm fixture:simulation-mcap "$fixture"
           xvfb-run -a pnpm test:integration "$exe" --release
