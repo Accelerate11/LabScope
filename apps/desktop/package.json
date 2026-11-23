@@ -2,6 +2,7 @@
   "name": "@labscope/desktop",
   "version": "0.1.0-beta.1",
   "private": true,
+  "license": "Apache-2.0",
   "type": "module",
   "description": "LabScope Desktop - Windows robotics data workstation",
   "homepage": "https://github.com/Accelerate11/LabScope",

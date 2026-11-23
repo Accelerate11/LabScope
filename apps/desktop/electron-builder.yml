@@ -15,10 +15,14 @@ extraResources:
     to: licenses/LabScope-Apache-2.0.txt
   - from: ../../THIRD_PARTY_NOTICES.md
     to: licenses/THIRD_PARTY_NOTICES.md
+  - from: ../../docs/release/FFMPEG_SOURCE.md
+    to: licenses/FFMPEG_SOURCE.md
   - from: ../../third-party/licenses
     to: licenses/third-party/licenses
 
 asar: true
+downloadAlternateFFmpeg: true
+afterPack: ./build/qualify-runtime.cjs
 
 electronFuses:
   runAsNode: false
@@ -29,10 +33,10 @@ electronFuses:
 
 win:
   target:
-    - target: nsis
+    - target: zip
       arch:
         - x64
-  artifactName: LabScope-${version}-windows-${arch}-unsigned.${ext}
+  artifactName: LabScope-${version}-windows-${arch}-portable.${ext}
 
 linux:
   executableName: labscope
@@ -40,9 +44,6 @@ linux:
   syncDesktopName: true
   maintainer: LabScope maintainers <261739268+Accelerate11@users.noreply.github.com>
   target:
-    - target: AppImage
-      arch:
-        - x64
     - target: deb
       arch:
         - x64
@@ -50,6 +51,7 @@ linux:
 
 deb:
   packageName: labscope
+  artifactName: LabScope-${version}-linux-amd64.${ext}
 
 nsis:
   oneClick: false

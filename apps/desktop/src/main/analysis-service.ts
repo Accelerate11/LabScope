@@ -30,7 +30,7 @@ function topicStats(state: TopicState): TopicAnalysis {
 export interface AnalysisRunResult { analysis: ExperimentAnalysis; logs?: LogAnalysis; }
 export class ExperimentAnalysisService {
   readonly tools = new ToolRegistry();
-  constructor(private readonly root = 'D:/LabScope/data/experiments') {
+  constructor(private readonly root: string) {
     this.tools.register({ id: 'get_experiment_info', name: 'Experiment information', description: 'Read experiment metadata and file integrity.', permission: 'read', execute: (input) => this.getExperimentInfo(String((input as { experimentId?: string })?.experimentId ?? '')) });
     this.tools.register({ id: 'get_topic_statistics', name: 'Topic statistics', description: 'Compute message counts, frequency, gaps, and timestamp jitter.', permission: 'read', execute: (input) => this.run(input) });
     this.tools.register({ id: 'analyze_imu', name: 'IMU analysis', description: 'Compute acceleration and angular velocity magnitude statistics.', permission: 'read', execute: (input) => this.run(input) });

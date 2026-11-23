@@ -6,6 +6,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { Worker } from 'node:worker_threads';
 import { WebSocketServer } from 'ws';
+import { testReleaseRenderer } from './release-smoke.mjs';
 
 const fixtures = new URL('../../../packages/ros-schema/test/fixtures/', import.meta.url);
 const sensors = [
@@ -219,6 +220,7 @@ try {
   await testPanelSubscriptions();
   await testSpatialWorker();
   if (process.argv[2]) await testWorkspaceRestart(process.argv[2]);
+  if (process.argv[2] && process.argv.includes('--release')) await testReleaseRenderer(process.argv[2], url);
 } finally {
   for (const socket of bridge.clients) socket.terminate();
   await new Promise((resolve, reject) => bridge.close((error) => error ? reject(error) : resolve()));

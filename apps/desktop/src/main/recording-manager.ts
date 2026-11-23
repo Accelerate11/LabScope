@@ -25,7 +25,7 @@ export class RecordingManager {
   private pauseAccumulated = 0;
   private segmentBytes = 0;
   private segmentStartedAt = 0;
-  constructor(private readonly baseDir = 'D:/LabScope/data/experiments') {}
+  constructor(private readonly baseDir: string) {}
   get snapshot(): RecordingStatus { return { ...this.status }; }
   private blank(): RecordingStatus { return { state: 'idle', experimentId: null, experimentDir: null, segment: 0, startedAt: null,
     pausedMs: 0, messageCount: 0, byteCount: 0, queueDepth: 0, queueCapacity: 0, queueHighWater: 0,
@@ -156,7 +156,7 @@ export class RecordingManager {
     await writeFile(temp, body, { flag: 'w' }); await rename(temp, file);
   }
 }
-export async function listExperiments(root = 'D:/LabScope/data/experiments'): Promise<ExperimentManifest[]> {
+export async function listExperiments(root: string): Promise<ExperimentManifest[]> {
   const projects = await readdir(root, { withFileTypes: true }).catch(() => []);
   const output: ExperimentManifest[] = [];
   for (const project of projects) if (project.isDirectory()) {

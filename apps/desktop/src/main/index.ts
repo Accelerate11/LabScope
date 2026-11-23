@@ -20,6 +20,7 @@ import { htmlReport, markdownReport } from '@labscope/analysis-engine';
 import { ConversationStore } from './conversation-store';
 import type { Conversation, ConversationMessage } from '../shared/conversation-types';
 import { mkdir, writeFile } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
 
 const currentDir = dirname(fileURLToPath(import.meta.url));
 const isDev = !app.isPackaged;
@@ -29,9 +30,8 @@ const mcapSmoke = process.argv.find((arg) => arg.startsWith('--smoke-mcap='));
 const isSmoke = isSimulationSmoke || pointCloudSmoke !== undefined || mcapSmoke !== undefined || process.argv.includes('--smoke');
 
 let mainWindow: BrowserWindow | null = null;
-const recorder = new RecordingManager();
+let recorder: RecordingManager;
 const ai = new AiGateway();
-const analysis = new ExperimentAnalysisService();
 const conversations = new ConversationStore();
 
 const host = new DataWorkerHost(join(currentDir, 'data-worker.js'), {
@@ -72,7 +72,8 @@ function sanitizeConfigPatch(value: unknown): Partial<DesktopConfig> {
   return patch;
 }
 
-function registerIpc(config: ConfigStore): void {
+function registerIpc(config: ConfigStore, experimentRoot: string): void {
+  const analysis = new ExperimentAnalysisService(experimentRoot);
   ipcMain.handle(IPC.appInfo, (): AppInfo => ({
     appVersion: app.getVersion(),
     electron: process.versions.electron ?? 'unknown',
@@ -130,7 +131,7 @@ function registerIpc(config: ConfigStore): void {
   ipcMain.handle(IPC.recordingResume, (): RecordingStatus => { const status = recorder.resume(); broadcast(IPC.recordingStatus, status); return status; });
   ipcMain.handle(IPC.recordingStop, async (): Promise<RecordingStatus> => { host.stopRecording(); const status = await recorder.stop(); broadcast(IPC.recordingStatus, status); return status; });
   ipcMain.handle(IPC.recordingCancel, async (): Promise<RecordingStatus> => { host.stopRecording(); const status = await recorder.cancel(); broadcast(IPC.recordingStatus, status); return status; });
-  ipcMain.handle(IPC.recordingList, async (): Promise<ExperimentManifest[]> => listExperiments());
+  ipcMain.handle(IPC.recordingList, async (): Promise<ExperimentManifest[]> => listExperiments(experimentRoot));
   ipcMain.handle(IPC.recordingEvent, (_event, value: unknown): void => {
     if (!value || typeof value !== 'object') throw new Error('实验事件无效');
     recorder.addEvent(value as Omit<ExperimentManifest['events'][number], 'id'>);
@@ -399,7 +400,12 @@ async function bootstrap(): Promise<void> {
   app.setAppUserModelId('com.labscope.desktop');
   Menu.setApplicationMenu(null);
   const config = new ConfigStore();
-  registerIpc(config);
+  const legacyRoot = 'D:/LabScope/data/experiments';
+  const experimentRoot = process.platform === 'win32' && !hasProfileOverride && existsSync(legacyRoot)
+    ? legacyRoot
+    : join(app.getPath('userData'), 'experiments');
+  recorder = new RecordingManager(experimentRoot);
+  registerIpc(config, experimentRoot);
 
   mainWindow = createWindow();
 
@@ -441,7 +447,8 @@ async function bootstrap(): Promise<void> {
 
 // Name the app before the instance lock or config store resolves userData.
 app.setName('LabScope');
-if (isSmoke) {
+const hasProfileOverride = process.argv.some((arg) => arg.startsWith('--user-data-dir='));
+if (isSmoke || hasProfileOverride) {
   const profile = app.commandLine.getSwitchValue('user-data-dir');
   if (profile) app.setPath('userData', profile);
 }

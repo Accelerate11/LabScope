@@ -18,7 +18,7 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - { platform: windows, runner: windows-2025, artifact: LabScope-windows-x64-unsigned }
+          - { platform: windows, runner: windows-2025, artifact: LabScope-windows-x64-portable }
           - { platform: linux, runner: ubuntu-24.04, artifact: LabScope-linux-x64 }
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -37,7 +37,20 @@ jobs:
       - if: matrix.platform == 'windows'
         run: pnpm --filter @labscope/desktop package
       - if: matrix.platform == 'windows'
-        run: pnpm test:integration ./apps/desktop/release/win-unpacked/LabScope.exe
+        shell: pwsh
+        run: |
+          $archive = Get-Item 'apps/desktop/release/*-windows-x64-portable.zip'
+          $portable = Join-Path $env:RUNNER_TEMP 'labscope-portable'
+          Expand-Archive -LiteralPath $archive.FullName -DestinationPath $portable
+          $exe = Join-Path $portable 'LabScope.exe'
+          pnpm test:integration $exe --release
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          pnpm test:simulation-ui $exe
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          $fixture = Join-Path $env:RUNNER_TEMP 'windows-simulation.mcap'
+          pnpm fixture:simulation-mcap $fixture
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          pnpm test:mcap-packaged $exe $fixture
       - if: matrix.platform == 'linux'
         shell: bash
         env:
@@ -47,18 +60,25 @@ jobs:
           pnpm --filter @labscope/desktop package:linux \
             "-c.extraMetadata.homepage=$PACKAGE_HOMEPAGE" \
             "-c.linux.maintainer=$PACKAGE_MAINTAINER"
-          pnpm test:integration
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends xvfb xauth ./apps/desktop/release/LabScope-0.1.0-beta.1-linux-amd64.deb
+          exe=/opt/LabScope/labscope
+          fixture="$RUNNER_TEMP/linux-simulation.mcap"
+          pnpm fixture:simulation-mcap "$fixture"
+          xvfb-run -a pnpm test:integration "$exe" --release
+          xvfb-run -a pnpm test:simulation-ui "$exe"
+          xvfb-run -a pnpm test:mcap-packaged "$exe" "$fixture"
       - name: Write package checksums
         shell: bash
         working-directory: apps/desktop/release
         run: |
           shopt -s nullglob
           if [[ "$RUNNER_OS" == Windows ]]; then
-            packages=(*-unsigned.exe)
+            packages=(*-windows-x64-portable.zip)
             [[ "${#packages[@]}" -eq 1 ]]
           else
-            packages=(*.AppImage *.deb)
-            [[ "${#packages[@]}" -eq 2 ]]
+            packages=(*.deb)
+            [[ "${#packages[@]}" -eq 1 ]]
           fi
           sha256sum -- "${packages[@]}" > SHA256SUMS.txt
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
@@ -67,7 +87,6 @@ jobs:
           name: ${{ matrix.artifact }}
           if-no-files-found: error
           path: |
-            apps/desktop/release/*-unsigned.exe
-            apps/desktop/release/*.AppImage
+            apps/desktop/release/*-windows-x64-portable.zip
             apps/desktop/release/*.deb
             apps/desktop/release/SHA256SUMS.txt

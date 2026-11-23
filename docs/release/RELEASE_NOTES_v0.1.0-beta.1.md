@@ -1,10 +1,13 @@
-# LabScope v0.1.0-beta.1 — First Public Beta
+# LabScope v0.1.0-beta.1 — Public Beta
 
-## Release status
+## LabScope introduction
 
 LabScope is a local-first robotics experiment workstation for visualization, recording, playback, and AI-assisted experiment analysis.
 
-The public pre-release is pending closure of the binary redistribution requirements.
+## Supported downloads
+
+- **Windows x64** has an unsigned portable ZIP. The NSIS installer is deferred while its WinShell redistribution terms are unresolved.
+- **Linux amd64** has a Debian package. AppImage is deferred while its legacy runtime and bundled GPL-linked libraries are under review.
 
 ## Implemented capabilities
 
@@ -27,6 +30,7 @@ The public pre-release is pending closure of the binary redistribution requireme
 - AI evidence click-to-seek Timeline integration is not complete
 - PDF export is available in the interface and still requires packaged workflow validation
 - Real API credentials and robot hardware were not tested
+- The bundled FFmpeg variant excludes proprietary codecs. The RGB-D viewer accepts the supported ROS image payloads.
 
 ## Windows security notice
 
@@ -34,7 +38,9 @@ Windows builds are unsigned by project policy. Windows Smart App Control or repu
 
 ## Installation
 
-Once the GitHub pre-release is available, verify the file against `SHA256SUMS.txt` before installation. On Windows x64, run the unsigned NSIS installer or extract the portable ZIP and open `LabScope.exe`. On Linux x86-64, make the AppImage executable and run it as your desktop user, or install the amd64 DEB with `sudo apt install ./LabScope-0.1.0-beta.1-linux-amd64.deb`.
+Verify the downloaded file against `SHA256SUMS.txt`. On Windows x64, extract the ZIP to a directory you own and open `LabScope.exe`. Remove that directory to uninstall the portable build. On a compatible Debian-based Linux x64 system, install with `sudo apt install ./LabScope-0.1.0-beta.1-linux-amd64.deb` and launch LabScope from the desktop menu or with `labscope`.
+
+Fresh installations save recordings under the application's per-user data directory. Existing Windows installations with `D:/LabScope/data/experiments` continue using that directory.
 
 ## ROS 2 setup
 
@@ -46,8 +52,8 @@ Configure a provider in AI Analysis. API keys remain local and use Electron `saf
 
 ## License status
 
-The maintainer selected Apache-2.0 for original LabScope code. Third-party components retain their own licenses. The remaining binary distribution requirements are tracked in the [release license blockers](RELEASE_LICENSE_BLOCKERS.md).
+Original LabScope source is Apache-2.0. Third-party components retain their own licenses. See the release assets for third-party notices, the SPDX SBOM, and FFmpeg corresponding source. [FFmpeg build and replacement instructions](https://github.com/Accelerate11/LabScope/blob/v0.1.0-beta.1/docs/release/FFMPEG_SOURCE.md)
 
 ## Feedback
 
-Report reproducible issues through the repository's GitHub Issues page. Remove API keys, private paths, robot addresses, and experiment data from reports.
+Report reproducible issues through [GitHub Issues](https://github.com/Accelerate11/LabScope/issues). Remove API keys, private paths, robot addresses, and experiment data from reports.
