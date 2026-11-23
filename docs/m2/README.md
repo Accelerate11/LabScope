@@ -1,5 +1,7 @@
 # M2 实时查看器与工作区
 
+**简体中文** · [English](README.en.md)
+
 M1-R2 的 Windows 运行、解包冒烟、安装后冒烟及卸载通过，M2 从现有实时监控入口开始。M0 的协议和 CDR 解析继续作为数据层，M1 的 Topic 观察和原始消息预览保留。
 
 M2.1 已提供多面板工作区和共享数据绑定。会话统计仍可放在顶部或右侧。面板渲染将从 M2.2 开始。
@@ -15,6 +17,8 @@ M2.2 已实现完整三维场景、高级相机、TF Fixed Frame、Pose、Odomet
 M2.3 已接入 RGB/Depth/CameraInfo、递归 Plot 字段、环形时序缓冲和共享 TimelineClock。[Camera Viewer](CAMERA_VIEWER.md) · [Image Decoder](IMAGE_DECODER_API.md) · [Plot](PLOT_ENGINE.md) · [时间同步](TIMELINE_SYNC.md) · [M2.3 验收](M2.3_TEST_REPORT.md) · [M2.3 性能](M2.3_PERFORMANCE_REPORT.md)
 
 M2.4 已接入主进程 RecordingManager、无压缩索引 MCAP 分段、队列背压、实验 Manifest、暂停/继续和 Data Center 基础界面。[Recorder 架构](RECORDER_ARCHITECTURE.md) · [Writer](MCAP_WRITER.md) · [Reader](MCAP_READER.md) · [Data Center](DATA_CENTER.md) · [M2.4 验收](M2.4_TEST_REPORT.md)
+
+下表记录 M2 最初的交付顺序和验收标准。
 
 | 顺序 | 交付 | 验收 |
 | --- | --- | --- |

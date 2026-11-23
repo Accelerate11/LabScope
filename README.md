@@ -1,5 +1,7 @@
 # LabScope
 
+**English** · [简体中文](README.zh-CN.md)
+
 LabScope is a local-first robotics experiment workstation for visualization, recording, playback, and AI-assisted analysis of ROS 2 data.
 
 **LabScope 0.1.0-beta.1** is available as an unsigned Windows x64 portable ZIP and a Linux amd64 DEB. [Download the public Beta](https://github.com/Accelerate11/LabScope/releases/tag/v0.1.0-beta.1) · [Beta release report](docs/release/PUBLIC_BETA_RELEASE_REPORT.md)
@@ -19,7 +21,8 @@ LabScope is a local-first robotics experiment workstation for visualization, rec
 - Multi-topic RecordingManager with pause/resume, bounded queues, segmentation, manifests, and SHA-256
 - Indexed uncompressed MCAP recording and indexed uncompressed/Zstd playback
 - Electron desktop runtime for Windows x64 and Linux x64 build targets
-- AI Gateway adapters for OpenAI-compatible, Anthropic, and Gemini endpoints
+- AI Gateway adapters for OpenAI-compatible, Anthropic, and Gemini endpoints, plus a credential-free Local Mock Provider
+- Deterministic analysis of indexed MCAP, local text log parsing and clustering, a read-only tool registry, and Markdown and HTML reports
 - Windows `safeStorage` API-key protection when the platform credential store is available
 
 ### Planned
@@ -28,8 +31,7 @@ LabScope is a local-first robotics experiment workstation for visualization, rec
 - Unindexed MCAP scan and temporary index creation
 - Automatic crash repair and disk-full recovery
 - Complete Data Center import, export, archive, and experiment editing
-- ROS/TXT/JSON log analysis and evidence-linked reports
-- Deterministic experiment analysis tools and controlled AI tool registry
+- Clickable report evidence that seeks the linked position on the timeline
 - Cross-experiment comparison, private knowledge base interfaces, and plugin APIs
 
 ## Architecture
@@ -84,13 +86,13 @@ pnpm test:runtime
 pnpm --filter @labscope/desktop dev
 ```
 
-The Windows package is unsigned by project policy. Build it with:
+To build the unsigned Windows x64 portable ZIP, run the following command.
 
 ```powershell
 pnpm --filter @labscope/desktop package
 ```
 
-Linux x64 packages use:
+To build the Linux amd64 DEB, run the following command.
 
 ```powershell
 pnpm --filter @labscope/desktop package:linux
@@ -112,13 +114,13 @@ In the Live view, enter an endpoint such as `ws://127.0.0.1:8765` or a bridge ad
 
 ## AI configuration
 
-AI Providers are configured from the AI Analysis workspace. Enter a provider name, model, HTTPS base URL, and API key. The key is passed to the Electron main process and encrypted with Windows `safeStorage` when available. It is not returned to the Renderer after saving.
+Configure AI providers in the AI Analysis workspace. Use the Local Mock Provider to try the workflow without a key. For a remote provider, enter its name, model, HTTPS base URL, and API key. The Electron main process handles the key and uses Windows `safeStorage` for encryption when available. After saving, the Renderer receives only the key's presence status.
 
 The current AI surface sends selected deterministic experiment metadata. It does not upload an entire MCAP file, grant arbitrary filesystem access, or execute system commands. Review data before sending a request to a remote provider.
 
 ## Testing
 
-The repository currently verifies:
+Run the following commands to verify the source and packaged application.
 
 ```powershell
 pnpm test
@@ -130,7 +132,7 @@ pnpm test:simulation-ui <path-to-electron>
 pnpm test:mcap-packaged <path-to-electron> <path-to-mcap>
 ```
 
-The current regression baseline is 119 Vitest tests. Simulation and packaged Electron checks use deterministic local fixtures. Real robot hardware, long-duration recording, and real provider credentials are separate validation activities.
+The public Beta release passed 122 unit tests and eight runtime checks. Simulation and packaged Electron checks use deterministic local fixtures. Real robot hardware, long-duration recording, and real provider credentials are separate validation activities. [Beta release report](docs/release/PUBLIC_BETA_RELEASE_REPORT.md)
 
 ## Screenshots
 
@@ -147,7 +149,7 @@ Original LabScope code is available under [Apache-2.0](LICENSE). Upstream compon
 ## Roadmap
 
 - Complete Data Management
-- AI Experiment Analysis
+- Expanded AI experiment analysis and timeline links for evidence
 - Cross-Experiment Comparison
 - Private Knowledge Base interfaces
 - Additional robot protocols
