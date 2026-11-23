@@ -51,7 +51,9 @@ jobs:
           pnpm fixture:simulation-mcap $fixture
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           pnpm test:mcap-packaged $exe $fixture
-      - if: matrix.platform == 'linux'
+      - name: Build Debian package
+        if: matrix.platform == 'linux'
+        timeout-minutes: 5
         shell: bash
         env:
           PACKAGE_HOMEPAGE: ${{ github.server_url }}/${{ github.repository }}
@@ -60,8 +62,22 @@ jobs:
           pnpm --filter @labscope/desktop package:linux \
             "-c.extraMetadata.homepage=$PACKAGE_HOMEPAGE" \
             "-c.linux.maintainer=$PACKAGE_MAINTAINER"
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends xvfb xauth ./apps/desktop/release/LabScope-0.1.0-beta.1-linux-amd64.deb
+      - name: Install Debian package and test display
+        if: matrix.platform == 'linux'
+        timeout-minutes: 4
+        shell: bash
+        run: |
+          args=(-o Acquire::Retries=1 -o Acquire::http::Timeout=15 -o Acquire::https::Timeout=15)
+          packages=(xvfb xauth ./apps/desktop/release/LabScope-0.1.0-beta.1-linux-amd64.deb)
+          if ! sudo apt-get "${args[@]}" install -y --no-install-recommends "${packages[@]}"; then
+            sudo apt-get "${args[@]}" update
+            sudo apt-get "${args[@]}" install -y --no-install-recommends "${packages[@]}"
+          fi
+      - name: Test installed desktop application
+        if: matrix.platform == 'linux'
+        timeout-minutes: 5
+        shell: bash
+        run: |
           # Xvfb has no supported GPU. Exercise Chromium's OpenGL ES driver in software.
           exe="$RUNNER_TEMP/labscope-software-gl"
           printf '%s\n' '#!/bin/sh' 'exec /opt/LabScope/labscope --use-gl=angle --use-angle=swiftshader "$@"' > "$exe"
